@@ -22,6 +22,7 @@ def about():
 def dashboard():
     if request.method == 'POST':
         email = request.form['email']
+        
         return f"<h1>Admin Dashboard: Authorization still pending</h1><h2>{email}</h2>"
 
 if __name__ == "__main__":
