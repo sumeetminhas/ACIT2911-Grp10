@@ -25,7 +25,7 @@ def dashboard():
         
         return f"<h1>Admin Dashboard: Authorization still pending</h1><h2>{email}</h2>"
 
-print('bleh')
+print('bleh haha')
 
 if __name__ == "__main__":
     app.run(debug=True)
