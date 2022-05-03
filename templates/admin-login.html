@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Stop Shop</title>
+    <title>Admin Login</title>
 </head>
 <body>
     <header class="header">
         <h1>One stop Shop</h1>
         <div>
-            <a href="/cart"><button><img src="#" alt="Cart icon" id="cart-logo"></button></a>
+            <a href="/cart"><img src="#" alt="Cart icon" id="cart-logo"></a>
         </div>
     </header>
     <div class="body">
@@ -22,6 +22,18 @@
                 <li class="nav-list"><a href="/about">about</a></li>
             </ul>
         </nav>
+    </div>
+    <div class="admin-login">
+        <form action="/admin/dashboard" method="post" id="admin-form">
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="user@email.com" required>
+            <br>
+            <label for="password">Email</label>
+            <input type="password" name="password" placeholder="Password" required>
+            <br>
+            <input type="submit" value="Submit">
+            <button name="Create Account">Create Account</button>
+        </form>
     </div>
     <footer>
         <ul>
