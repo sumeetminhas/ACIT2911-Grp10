@@ -8,15 +8,21 @@ def homepage():
 
 @app.route('/products')
 def products():
-    return '<h1>Products Page</h1>'
+    return render_template('/products.html')
 
 @app.route('/admin')
 def admin():
-    return '<h1>Admin Login Page</h1>'
+    return render_template('admin-login.html')
 
 @app.route('/about')
 def about():
-    return '<h1>About our One Stop Shop</h1>'
+    return redirect
+
+@app.route('/admin/dashboard', methods = ['POST'])
+def dashboard():
+    if request.method == 'POST':
+        email = request.form['email']
+        return f"<h1>Admin Dashboard: Authorization still pending</h1><h2>{email}</h2>"
 
 if __name__ == "__main__":
     app.run(debug=True)
