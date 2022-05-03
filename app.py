@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
+import os
+import json
 
 app = Flask(__name__)
 
@@ -22,10 +24,14 @@ def about():
 def dashboard():
     if request.method == 'POST':
         email = request.form['email']
-        
-        return f"<h1>Admin Dashboard: Authorization still pending</h1><h2>{email}</h2>"
-
-print('bleh')
+        password = request.form['password']
+        with open('creds.json', 'r') as creds:
+            admin_list = json.loads(creds.read())
+            for admin in admin_list:
+                print(password, email)
+                if email == admin['email'] and password == admin['password']:
+                    return render_template('admin_dashboard.html', user = admin['name'])
+                else: return "Failure to authenticate"
 
 if __name__ == "__main__":
     app.run(debug=True)
