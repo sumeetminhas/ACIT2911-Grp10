@@ -31,6 +31,9 @@
             <label for="password">Email</label>
             <input type="password" name="password" placeholder="Password" required>
             <br>
+            {% for message in get_flashed_messages() %}
+            <p><strong>{{ message }}</strong></p>
+            {% endfor %}
             <input type="submit" value="Submit">
             <button name="Create Account">Create Account</button>
         </form>
