@@ -7,45 +7,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo&family=IBM+Plex+Sans+Condensed&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles-login.css">
     <title>Admin Login</title>
 </head>
 <body>
-    <header class="header">
-        <h1>One stop Shop</h1>
-        <div>
-            <a href="#"><button><img src="../static/shopping-cart.jpg" alt="Cart icon" id="cart-logo" width="50px"></button></a>
-        </div>
-    </header>
-    <div class="body">
-        <nav class="nav-bar">
-            <ul class="nav-area">
-                <li class="nav-list"><a href="/">Homepage</a></li>
-                <li class="nav-list"><a href="/products">Product List</a></li>
-                <li class="nav-list"><a href="/admin">Admin Portal</a></li>
-                <li class="nav-list"><a href="/about">about</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="admin-login">
-        <form action="/admin/dashboard" method="post" id="admin-form">
-            <label for="email">Email</label>
-            <input type="email" name="email" placeholder="user@email.com" required>
-            <br>
-            <label for="password">Password</label>
-            <input type="password" name="password" placeholder="Password" required>
-            <br>
-            {% for message in get_flashed_messages() %}
-            <p><strong>{{ message }}</strong></p>
-            {% endfor %}
-            <input type="submit" value="Submit">
-        </form>
-    <footer>
-        <ul class="contact">
-            <li>Contact Us</li>
-            <li>List item 2</li>
-            <li>List item 3</li>
-        </ul>
-    </footer>
+    <div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form>
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input type="text" name="txt" placeholder="User name" required="">
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="password" name="pswd" placeholder="Password" required="">
+					<button>Sign up</button>
+				</form>
+			</div>
+
+			<div class="login">
+				<form action="/admin/dashboard" method="post">
+					<label for="chk" aria-hidden="true">Login</label>
+					<input type="email" name="email" placeholder="Email" required="">
+					<input type="password" name="password" placeholder="Password" required="">
+					<button>Login</button>
+				</form>
+			</div>
+	</div>
 </body>
 </html>
