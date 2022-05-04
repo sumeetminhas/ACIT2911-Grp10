@@ -11,27 +11,33 @@
     <title>Admin Login</title>
 </head>
 <body>
-    <div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
-
-			<div class="signup">
-				<form>
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User name" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Sign up</button>
-				</form>
-			</div>
-
-			<div class="login">
-				<form action="/admin/dashboard" method="post">
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="password" placeholder="Password" required="">
-					<button>Login</button>
-				</form>
-			</div>
-	</div>
+    <form method="post" action="/admin/dashboard" id="login-form" class="login-form" autocomplete="off" role="main">
+        <h1 class="a11y-hidden">Login Form</h1>
+        <div>
+          <label class="label-email">
+            <input type="email" class="text" name="email" placeholder="Email" tabindex="1" required />
+            <span class="required">Email</span>
+          </label>
+        </div>
+        <div>
+          <label class="label-password">
+            <input type="password" class="text" name="password" placeholder="Password" tabindex="2" required />
+            <span class="required">Password</span>
+          </label>
+        </div>
+        <input type="submit" value="Log In" />
+        <figure aria-hidden="true">
+          <div class="person-body"></div>
+          <div class="neck skin"></div>
+          <div class="head skin">
+            <div class="eyes"></div>
+            <div class="mouth"></div>
+          </div>
+          <div class="hair"></div>
+          <div class="ears"></div>
+          <div class="shirt-1"></div>
+          <div class="shirt-2"></div>
+        </figure>
+      </form>
 </body>
 </html>
