@@ -23,12 +23,18 @@ def admin():
 
 @app.route('/about')
 def about():
-    return redirect
+    return render_template('about.html')
 
 
 @app.route('/admin/dashboard', methods=['POST'])
 def dashboard():
     if request.method == 'POST':
+
+        email = request.form['email']
+        
+        return f"<h1>Admin Dashboard: Authorization still pending</h1><h2>{email}</h2>"
+
+
         email, password = request.form['email'], request.form['password']
         with open('creds.json', 'r') as creds:
             admin_list = json.loads(creds.read())
@@ -41,25 +47,6 @@ def dashboard():
                     return redirect('/admin')
 
 
-# @app.route('/add_user')
-# def add_user():
-#     if request.method in ['POST', 'GET']:
-#         name = request.form['user_name']
-#         email = request.form['email']
-#         password = request.form['password']
-#         with open('creds.json', 'r') as creds:
-#             admin_list = json.loads(creds.read())
-#             new_admin = {
-#                 "name": name,
-#                 "email": email,
-#                 "password": password
-#             }
-#             admin_list.append(new_admin)
-#             with open('creds.json', 'w') as file:
-#                 file.write(json.dumps(admin_list))
-#             return "Success"
-#     else: 
-#         return "Not working"
 
 
 if __name__ == "__main__":
