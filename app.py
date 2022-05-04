@@ -29,9 +29,7 @@ def about():
 @app.route('/admin/dashboard', methods=['POST'])
 def dashboard():
     if request.method == 'POST':
-
         email = request.form['email']
-
         email, password = request.form['email'], request.form['password']
         with open('creds.json', 'r') as creds:
             admin_list = json.loads(creds.read())
