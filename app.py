@@ -20,7 +20,7 @@ def admin():
 
 @app.route('/about')
 def about():
-    return redirect
+    return render_template('/about.html')
 
 
 @app.route('/admin/dashboard', methods=['POST'])
