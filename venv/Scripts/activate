@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\best_\OneDrive\Documents\GitHub\ACIT2911-Grp10\venv"
+VIRTUAL_ENV="D:\BCIT_Courses\Project_5_Weeks\Project\Yingyi_Fork_ACIT2911_Grp10\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

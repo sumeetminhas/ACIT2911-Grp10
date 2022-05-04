@@ -24,6 +24,12 @@ def about():
 @app.route('/admin/dashboard', methods = ['POST'])
 def dashboard():
     if request.method == 'POST':
+
+        email = request.form['email']
+        
+        return f"<h1>Admin Dashboard: Authorization still pending</h1><h2>{email}</h2>"
+
+=======
         email, password = request.form['email'], request.form['password']
         with open('creds.json', 'r') as creds:
             admin_list = json.loads(creds.read())

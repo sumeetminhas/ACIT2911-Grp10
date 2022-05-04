@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\best_\OneDrive\Documents\GitHub\ACIT2911-Grp10\venv
+set VIRTUAL_ENV=D:\BCIT_Courses\Project_5_Weeks\Project\Yingyi_Fork_ACIT2911_Grp10\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
