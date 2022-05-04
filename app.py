@@ -24,6 +24,12 @@ def about():
 @app.route('/admin/dashboard', methods = ['POST'])
 def dashboard():
     if request.method == 'POST':
+
+        email = request.form['email']
+        
+        return f"<h1>Admin Dashboard: Authorization still pending</h1><h2>{email}</h2>"
+
+=======
         email, password = request.form['email'], request.form['password']
         with open('creds.json', 'r') as creds:
             admin_list = json.loads(creds.read())
@@ -35,6 +41,7 @@ def dashboard():
                     print('What the fuck is happening?')
                     return redirect('/admin')
 
+<<<<<<< HEAD
 # @app.route('/add_user')
 # def add_user():
 #     if request.method in ['POST', 'GET']:
@@ -54,6 +61,9 @@ def dashboard():
 #             return "Success"
 #     else: 
 #         return "Not working"
+=======
+print('bleh haha')
+>>>>>>> a07830ee0a80546eff5d4e442a411e74324b7974
 
 if __name__ == "__main__":
     app.run(debug=True)
