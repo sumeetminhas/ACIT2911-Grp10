@@ -1,0 +1,68 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+
+}
+
+button {
+    border-color: #000000;
+    width: 80px;
+}
+h1 {
+    font-family: 'IBM Plex Sans Condensed', sans-serif; 
+    color:#FFFFFF;
+    font-size: 60px;
+}
+
+body {
+    background-color: #000000;
+}
+
+p {
+    font-family: 'Arvo', serif;
+}
+
+.nav-area {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    padding-right:10px;
+    background-color: #202a44;
+    border: 10px;
+    border-color: #ffffff;
+    
+}
+
+.nav-list {
+    padding-left: 15px;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    font-size:18px;
+    font-family: 'Arvo', serif;
+    color: #FFFFFF;
+}
+
+a:hover {
+    font-size: 20px;
+    color: #fff1c2;
+}
+
+.contact {
+    font-size: 15px;
+    color: #FFFFFF; 
+    font-family: 'Arvo', serif;
+    list-style: none;
+    padding-left: 15px;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+
+
