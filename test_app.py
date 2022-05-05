@@ -15,19 +15,19 @@ def test_products():
     with flask_app.test_client() as test_client:
         response = test_client.get('/products')
         assert response.status_code == 200
-        assert b"<title>Homepage</title>" in response.data
+        assert b"<title>Products - One Stop Shop</title>" in response.data
         
 def test_admin():
     with flask_app.test_client() as test_client:
         response = test_client.get('/admin')
         assert response.status_code == 200
-        assert b"<title>Homepage</title>" in response.data
+        assert b"<title>Admin Login</title>" in response.data
 
 def test_about():
     with flask_app.test_client() as test_client:
         response = test_client.get('/about')
         assert response.status_code == 200
-        assert b"<title>Homepage</title>" in response.data
+        assert b"<title>About Page</title>" in response.data
 
 
 
