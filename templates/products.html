@@ -14,7 +14,7 @@
     <header>
         <h1 class="header-item">One stop Shop</h1>
         <div>
-            <a href="#" class="header-item"><button><img src="../static/shopping-cart.jpg" alt="Cart icon" id="cart-logo" width="50px"></button></a>
+            <a href="#" id="cart-logo"><button><img src="../static/shopping-cart.jpg" alt="Cart icon" width="50px"></button></a>
         </div>
     </header>
     <div class="body">
@@ -27,11 +27,28 @@
             </ul>
         </nav>
     </div>
+    <div class="main-content">
+        <table>
+            <tr>
+                {% for product in products[0] %}
+                <th>{{product}}</th>
+                {% endfor %}
+            </tr>
+            {% for product in products[1:] %}
+            <tr>
+                {% for item in product %}
+                <td>{{item}}</td>
+                {% endfor %}
+                <td><input type="button" value="Add to Cart"></td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
     <footer>
         <ul class="contact">
             <li>Contact Us</li>
-            <li>List item 2</li>
-            <li>List item 3</li>
+            <li>Location</li>
+            <li>Something</li>
         </ul>
     </footer>
 </body>

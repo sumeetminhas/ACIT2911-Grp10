@@ -1,9 +1,35 @@
-import json
-import requests
-import inspect
-from app import dashboard, app
-from pathlib import Path
+from flask import Flask, render_template, request
+from app import app
+
 import pytest
+
+flask_app = app
+
+def test_homepage():
+    with flask_app.test_client() as test_client:
+        response = test_client.get('/')
+        assert response.status_code == 200
+        assert b"<title>Homepage</title>" in response.data
+
+def test_products():
+    with flask_app.test_client() as test_client:
+        response = test_client.get('/products')
+        assert response.status_code == 200
+        assert b"<title>Products - One Stop Shop</title>" in response.data
+        
+def test_admin():
+    with flask_app.test_client() as test_client:
+        response = test_client.get('/admin')
+        assert response.status_code == 200
+        assert b"<title>Admin Login</title>" in response.data
+
+def test_about():
+    with flask_app.test_client() as test_client:
+        response = test_client.get('/about')
+        assert response.status_code == 200
+        assert b"<title>About Page</title>" in response.data
+
+
 
 # API_URL = "http://127.0.0.1:5000"
 
@@ -53,30 +79,29 @@ import pytest
 #         return
 
 
-@pytest.fixture()
-def client():
-    return app.test_client()
+# @pytest.fixture()
+# def client():
+#     return app.test_client()
 
 
-def test_valid_admin_user(client):
-    response = client.post("/admin/dashboard",
-                           data={"email": "hello"})
-    assert response.status_code == 200
+# def test_valid_admin_user(client):
+#     response = client.post("/admin/dashboard",
+#                            data={"email": "hello"})
+#     assert response.status_code == 200
 
 
-def check():
-    funcs = [
-        # homepage,
-        test_valid_admin_user
-    ]
+# def check():
+#     funcs = [
+#         # homepage,
+#         test_valid_admin_user
+#     ]
 
-    for func in funcs:
-        print("=" * 80)
-        print(inspect.getdoc(func))
-        print("-" * 80)
-        func()
-        print()
-
+#     for func in funcs:
+#         print("=" * 80)
+#         print(inspect.getdoc(func))
+#         print("-" * 80)
+#         func()
+#         print()
 
 if __name__ == "__main__":
-    check()
+    test_homepage()
