@@ -27,6 +27,22 @@
             </ul>
         </nav>
     </div>
+    <div class="main-content">
+        <table>
+            <th>
+            {% for product in products[0] %}
+            <td>{{product}}</td>
+            {% endfor %}
+            </th>
+            {% for product in products[1:] %}
+            <tr>
+                {% for item in product %}
+                <td>{{item}}</td>
+                {% endfor %}
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
     <footer>
         <ul class="contact">
             <li>Contact Us</li>
