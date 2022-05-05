@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 import json
+import csv
 
 app = Flask(__name__)
 app.secret_key = "sdfsanfdjksdbafkjsah"
@@ -13,7 +14,9 @@ def homepage():
 
 @app.route('/products')
 def products():
-    return render_template('/products.html')
+    with open('products.csv', 'r') as file:
+        product_list = list(csv.reader(file))    
+    return render_template('/products.html', products=product_list, )
 
 
 @app.route('/admin')
