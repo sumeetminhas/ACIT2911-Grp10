@@ -38,7 +38,6 @@ p {
     padding-bottom: 10px;
     padding-right:10px;
     background-image: linear-gradient(0.45turn, #202a44, #f69d3c);
-
     border: 10px;
     
 }
@@ -84,6 +83,4 @@ footer {
     height:60px;   /* Height of the footer */
     background: linear-gradient(0.25turn, #4a88a7, #ebf8e1, #f69d3c);
  }
-
-
 

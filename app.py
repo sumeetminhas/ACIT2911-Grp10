@@ -29,18 +29,17 @@ def about():
 @app.route('/admin/dashboard', methods=['POST'])
 def dashboard():
     if request.method == 'POST':
-
         email = request.form['email']
-
         email, password = request.form['email'], request.form['password']
         with open('creds.json', 'r') as creds:
             admin_list = json.loads(creds.read())
+            print(admin_list)
             for admin in admin_list:
                 if email == admin['email'] and password == admin['password']:
                     return render_template('admin_dashboard.html', user=admin['name'])
-                else:
-                    flash("Incorrect email or password. Try Again..")
-                    return redirect('/admin')
+            
+            flash("Incorrect email or password. Try Again..")
+            return redirect('/admin')
 
 
 
