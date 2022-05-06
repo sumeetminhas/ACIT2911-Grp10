@@ -17,7 +17,7 @@ def products():
     if os.path.exists('products.csv'):
         with open('products.csv', 'r') as file:
             product_list = list(csv.reader(file))    
-        return render_template('/products.html', products=product_list, )
+        return render_template('/products.html', products=product_list )
     else:
         return "<h1>No Products to display</h1><h2>request the admin to upload product list."
 
