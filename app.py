@@ -19,7 +19,7 @@ def products():
             product_list = list(csv.reader(file))    
         return render_template('/products.html', products=product_list )
     else:
-        return "<h1>No Products to display</h1><h2>request the admin to upload product list."
+        return "<h1>No Products to display</h1><h2>Please visit us at a later time.</h2>"
 
 # def product_image():
 #     images = os.listdir('static/product_image')
