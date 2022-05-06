@@ -22,7 +22,14 @@
         </nav>
     </div>
     <div class="feature-area">
-        <div class="update-product">Modify Product List</div>
+        <div class="update-product">
+            Modify Product List
+            <form action="/update-inventory" method="post" class="update-product-list">
+                <label for="file-name">Upload File</label>
+                <input type="file" name="file-name" placeholder="Enter file path">
+                <input type="submit" value="Submit">
+            </form>
+        </div>
         <div class="trans-list">List of transactions</div>
         <div class="item-deficit">Items required to be re-ordered</div>
     </div>
