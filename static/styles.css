@@ -29,25 +29,24 @@ button {
 }
 h2 {
     font-family: 'IBM Plex Sans Condensed', sans-serif; 
-<<<<<<< HEAD
     color:#000000;
     font-size: 40px;
-=======
-    color:#FFFFFF;
-    font-size: 40px;
+    color:#000000;
+    font-size: 30px;
     padding-left: 20px;
->>>>>>> c33f4911f8f127ee36c859389afe96e11dee0e8f
+    
 }
 
 .about-section {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding-left: 15px;
 }
 
 p {
     font-family: 'Arvo', serif;
+    padding-left: 20px;
 }
 
 .nav-area {
@@ -159,6 +158,8 @@ footer {
     height: 400px;
     width: 33%;
     text-align: center;
-    font-size: 24px;
+    font-size: 23px;
     border: 1.5px solid black;
+    font-family: 'Arvo', serif;
+    padding: 20px;
 }

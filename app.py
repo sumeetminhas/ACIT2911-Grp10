@@ -16,15 +16,19 @@ def homepage():
 def products():
     if os.path.exists('products.csv'):
         with open('products.csv', 'r') as file:
-            product_list = list(csv.reader(file))    
-        return render_template('/products.html', products=product_list )
+            product_list = list(csv.reader(file))
+            images = os.listdir('static/product_image')
+            new_list = []
+            for image in images:
+                new_list.append(image[:-4])
+            # print(images[0])
+            # print(product_list[1])
+            # print(new_list[0])
+
+        return render_template('/products.html', products=product_list, image_list=new_list)
     else:
         return "<h1>No Products to display</h1><h2>request the admin to upload product list."
 
-# def product_image():
-#     images = os.listdir('static/product_image')
-#     images = ['plots/' + file for file in images]
-#     return render_template('products.html', images = images)
 
 
 @app.route('/admin')
