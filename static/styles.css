@@ -1,8 +1,11 @@
 .header {
     display: flex;
     flex-direction: row;
-    padding-left: 20px;
     justify-content: space-between;
+}
+
+header h1 {
+    font-size: 50px;
 }
 
 #cart-logo {
@@ -19,12 +22,14 @@ button {
 h1 {
     font-family: 'IBM Plex Sans Condensed', sans-serif; 
     color:#FFFFFF;
-    font-size: 60px;
-    padding-left: 0;
+    font-size: 40px;
+    padding-left: 20px;
 }
 
 body {
     background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+    margin-bottom: 100px;
+
 }
 
 p {
@@ -60,6 +65,47 @@ a:hover {
     color: #fff1c2;
 }
 
+.main-content {
+    background-color: #fbf3de;
+    padding: 10px;
+    border-width:5px;
+    border-style: double;
+    border-color: #000000;
+}
+
+.main-content table {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.main-content th {
+    background-color: #FFFFFF;
+    width: 360px;
+}
+
+.main-content td {
+    text-align: center;
+    overflow:break-word;
+    width: 360px;
+    padding-left: 30px;
+    border-bottom: 2px solid #ddd;
+}
+
+.main-content input{
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 5px;
+    border-width: 3px;
+    border-color: #000000;
+    border-style: solid;
+}
+
+.main-content input:hover {
+    background-color: #202a44;
+    color: #FFFFFF
+}
+
 .contact {
     display: flex;
     flex-direction: row;
@@ -77,10 +123,28 @@ a:hover {
 footer {
     display: flex;
     justify-content: center;
-    position:absolute;
+    position:fixed;
     bottom:0;
     width:100%;
     height:60px;   /* Height of the footer */
     background: linear-gradient(0.25turn, #4a88a7, #ebf8e1, #f69d3c);
- }
+}
 
+.welcome-prompt {
+    font-size: 24px;
+    color: white;
+}
+
+.feature-area{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.update-product, .trans-list, .item-deficit {
+    height: 400px;
+    width: 33%;
+    text-align: center;
+    font-size: 24px;
+    border: 1.5px solid black;
+}
