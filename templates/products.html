@@ -11,7 +11,7 @@
     <title>Products - One Stop Shop</title>
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1 class="header-item">One stop Shop</h1>
         <div>
             <a href="#" id="cart-logo"><button><img src="../static/shopping-cart.jpg" alt="Cart icon" width="50px"></button></a>
@@ -30,12 +30,15 @@
     <div class="main-content">
         <table>
             <tr>
+                <th></th>
                 {% for product in products[0] %}
                 <th>{{product}}</th>
                 {% endfor %}
+                <th></th>
             </tr>
             {% for product in products[1:] %}
             <tr>
+                <td>image</td>
                 {% for item in product %}
                 <td>{{item}}</td>
                 {% endfor %}

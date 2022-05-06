@@ -21,6 +21,11 @@ def products():
     else:
         return "<h1>No Products to display</h1><h2>request the admin to upload product list."
 
+# def product_image():
+#     images = os.listdir('static/product_image')
+#     images = ['plots/' + file for file in images]
+#     return render_template('products.html', images = images)
+
 
 @app.route('/admin')
 def admin():
@@ -46,7 +51,6 @@ def dashboard():
             
             flash("Incorrect email or password. Try Again..")
             return redirect('/admin')
-
 
 
 
