@@ -1,8 +1,11 @@
 .header {
     display: flex;
     flex-direction: row;
-    padding-left: 20px;
     justify-content: space-between;
+}
+
+header h1 {
+    font-size: 50px;
 }
 
 #cart-logo {
@@ -19,8 +22,8 @@ button {
 h1 {
     font-family: 'IBM Plex Sans Condensed', sans-serif; 
     color:#FFFFFF;
-    font-size: 60px;
-    padding-left: 0;
+    font-size: 40px;
+    padding-left: 20px;
 }
 
 body {
@@ -127,3 +130,21 @@ footer {
     background: linear-gradient(0.25turn, #4a88a7, #ebf8e1, #f69d3c);
 }
 
+.welcome-prompt {
+    font-size: 24px;
+    color: white;
+}
+
+.feature-area{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.update-product, .trans-list, .item-deficit {
+    height: 400px;
+    width: 33%;
+    text-align: center;
+    font-size: 24px;
+    border: 1.5px solid black;
+}
