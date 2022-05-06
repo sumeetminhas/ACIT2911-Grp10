@@ -27,7 +27,7 @@ def products():
 
         return render_template('/products.html', products=product_list, image_list=new_list)
     else:
-        return "<h1>No Products to display</h1><h2>request the admin to upload product list."
+        return "<h1>No Products to display</h1><h2>Please visit us at a later time.</h2>"
 
 
 
