@@ -18,6 +18,11 @@ def products():
         product_list = list(csv.reader(file))    
     return render_template('/products.html', products=product_list, )
 
+# def product_image():
+#     images = os.listdir('static/product_image')
+#     images = ['plots/' + file for file in images]
+#     return render_template('products.html', images = images)
+
 
 @app.route('/admin')
 def admin():
@@ -43,7 +48,6 @@ def dashboard():
             
             flash("Incorrect email or password. Try Again..")
             return redirect('/admin')
-
 
 
 
