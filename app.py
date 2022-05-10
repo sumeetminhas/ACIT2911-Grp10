@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from cart import Cart
 import os
 import json
 import csv
@@ -6,9 +7,19 @@ import csv
 app = Flask(__name__)
 app.secret_key = "sdfsanfdjksdbafkjsah"
 
+LIVE_SESSIONS = []
+
 
 @app.route('/')
 def homepage():
+    if len(LIVE_SESSIONS) == 0:
+        LIVE_SESSIONS.append(Cart(request.remote_addr))
+    for user in LIVE_SESSIONS:
+        if user.owner == request.remote_addr:
+            break
+        else: LIVE_SESSIONS.append(Cart(request.remote_addr))
+
+    print(LIVE_SESSIONS)
     return render_template('/home.html')
 
 
@@ -33,24 +44,32 @@ def products():
 
 @app.route('/admin')
 def admin():
-    return render_template('admin-login.html')
+    with open('creds.json', 'r') as creds:
+            admin_list = json.loads(creds.read())
+            for admin in admin_list:
+                if admin['email'] in session.values():
+                    return render_template('admin_dashboard.html', user=admin['name'])
+            return render_template('admin-login.html')
 
 
 @app.route('/about')
 def about():
+    print(LIVE_SESSIONS)
     return render_template('about.html')
 
 
 @app.route('/admin/dashboard', methods=['POST'])
 def dashboard():
     if request.method == 'POST':
-        email = request.form['email']
-        email, password = request.form['email'], request.form['password']
         with open('creds.json', 'r') as creds:
             admin_list = json.loads(creds.read())
-            print(admin_list)
+            email, password = request.form['email'], request.form['password']
             for admin in admin_list:
-                if email == admin['email'] and password == admin['password']:
+                if admin['email'] in session.values(): 
+                    return render_template('admin_dashboard.html', user=admin['name'])
+                elif email == admin['email'] and password == admin['password']:
+                    session["email"] = email
+                    for item in session.values(): print(item)
                     return render_template('admin_dashboard.html', user=admin['name'])
             
             flash("Incorrect email or password. Try Again..")
