@@ -18,9 +18,7 @@ def homepage():
         if user.owner == request.remote_addr:
             break
         else: LIVE_SESSIONS.append(Cart(request.remote_addr))
-
-    print(LIVE_SESSIONS)
-    return render_template('/home.html')
+    return render_template('/home.html', users=LIVE_SESSIONS)
 
 
 @app.route('/products')
