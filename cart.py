@@ -3,6 +3,9 @@ class Cart:
         self.owner = owner
         self.list = []
 
+    def addItem(self, item):
+        pass
+
 #     def __add__(self, item):
 #         self.list.append(item)
 
