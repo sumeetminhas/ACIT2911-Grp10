@@ -35,13 +35,6 @@
             </ul>
         </nav>
     </div>
-    <!-- <p>something to enter: </p>
-    {% if random == 'Doris' %}
-    <h3>{{ 'name is Doris' }}</h3>
-    {% else %}
-    <h3>{{ 'name is Ramansh' }}</h3>
-    {% endif %} -->
-    
     <div class="main-content">
         <table>
             <tr>
@@ -53,11 +46,7 @@
             </tr>
             {% for product in products[1:] %}
             <tr>
-                {% if product[1] in image_list %}
-                <td><img src="../static/product_image/{{product[1]}}.jpg" alt="Image Not Found" height="150px"></td>
-                {% else %}
-                <td>Image not found</td>
-                {% endif %}
+                <td>image</td>
                 {% for item in product %}
                 <td>{{item}}</td>
                 {% endfor %}
