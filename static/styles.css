@@ -31,22 +31,34 @@ header h1 {
 }
 
 #side-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #202a44;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right:50px;
-    border-width: 10px;
+    background-color: #fff1c2;
+    color: #202a44;
+    padding-left: 15px;
+    padding-right:20px;
+    border-width: 5px;
     border-radius: 3px;
-    width: 90px;
+    width: 130px;
     height: 300px;
+    border-color: #202a44;
+    border-style: double;
+    border-radius: 6px;
+    overflow-y: scroll;
+    word-break: break-all;
+}
+
+#side-content p {
+    color:#202a44;
+    font-size: 16px;
+}
+
+#side-content p:hover {
+    color:#f69d3c;
 }
 
 #back {
-    width: 40px;
-    height: 40px;
+    margin-top: 20px;
+    width: 30px;
+    height: 30px;
     border-color:#000000;
     border-style: double;
     border-width: 4px;
@@ -59,6 +71,11 @@ header h1 {
     font-size: 18px;
 }
 
+#back:hover {
+    border-color:#FFFFFF;
+    background-color:#202a44;
+    color: #FFFFFF;
+}
 
 button {
     border-color: #000000;
@@ -72,8 +89,7 @@ h2 {
     font-size: 40px;
     color:#000000;
     font-size: 30px;
-    padding-left: 20px;
-    
+    padding-left: 20px;  
 }
 
 .about-section {
