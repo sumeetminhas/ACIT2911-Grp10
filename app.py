@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.secret_key = "sdfsanfdjksdbafkjsah"
 
 LIVE_SESSIONS = []
+active_cart = []
 
 
 @app.route('/')
@@ -18,6 +19,8 @@ def homepage():
         if user.owner == request.remote_addr:
             break
         else: LIVE_SESSIONS.append(Cart(request.remote_addr))
+    
+    print(LIVE_SESSIONS)
     return render_template('/home.html', users=LIVE_SESSIONS)
 
 
@@ -27,14 +30,8 @@ def products():
         with open('products.csv', 'r') as file:
             product_list = list(csv.reader(file))
             images = os.listdir('static/product_image')
-            new_list = []
-            for image in images:
-                new_list.append(image[:-4])
-            # print(images[0])
-            # print(product_list[1])
-            # print(new_list[0])
 
-        return render_template('/products.html', products=product_list, image_list=new_list)
+        return render_template('/products.html', products=product_list, image_list=images)
     else:
         return "<h1>No Products to display</h1><h2>Please visit us at a later time.</h2>"
 
@@ -52,7 +49,10 @@ def admin():
 
 @app.route('/about')
 def about():
-    print(LIVE_SESSIONS)
+    for user in LIVE_SESSIONS:
+        if user.owner == request.remote_addr:
+            for item in user.list:
+                print(item)
     return render_template('about.html')
 
 
@@ -73,6 +73,21 @@ def dashboard():
             flash("Incorrect email or password. Try Again..")
             return redirect('/admin')
 
+@app.route("/add-to-cart", methods = ['GET', 'POST'])
+def add_to_cart():
+    if request.method == 'POST':
+        p_id = request.form['p-id']
+        p_name = request.form['p-name']
+        p_cost = request.form['p-cost']
+        p_desc = request.form['p-desc']
+        p_cat = request.form['p-cat']
+        product = [p_id, p_name, p_cost, p_desc, p_cat]
+
+        for user in LIVE_SESSIONS:
+            if user.owner == request.remote_addr:
+                user.list.append(product)
+    
+    return redirect('/products')
 
 
 if __name__ == "__main__":
