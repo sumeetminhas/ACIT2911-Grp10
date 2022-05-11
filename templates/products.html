@@ -8,14 +8,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo&family=IBM+Plex+Sans+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <script defer src="../static/app.js"></script>
     <title>Products - One Stop Shop</title>
 </head>
 <body>
     <header class="header">
         <h1 class="header-item">One stop Shop</h1>
-        <div>
-            <a href="#" id="cart-logo"><button><img src="../static/shopping-cart.jpg" alt="Cart icon" width="50px"></button></a>
-        </div>
+        <section id="side-nav">
+            <button id="cart-logo">
+                <img src="../static/shopping-cart.jpg" alt="Cart icon" width="40px">
+            </button>
+            <div id="side-content">
+                <button id="back">></button>
+                <a href="#">item one</a>
+                <a href="#">item two</a>
+            </div>
+        </section>
     </header>
     <div class="body">
         <nav class="nav-bar">
