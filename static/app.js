@@ -6,6 +6,7 @@ navContent.style.display = 'none'
 
 btnCart.addEventListener('click',openSideNav)
 btnBack.addEventListener('click',closeSideNav)
+
 function openSideNav(){
     navContent.style.display = 'block'
     btnCart.style.display = "none"

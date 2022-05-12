@@ -20,9 +20,16 @@
             </button>
             <div id="side-content">
                 <button id="back">></button>
-                <p>item one<p>
-                <p>item two</p>
-                <p>item three</p>
+                {% if users %}
+                    {% for user in users %}
+                        {% if user.owner == request.remote_addr %}
+                            {% for item in user.list %}
+                                <li class="cart-item">{{item[1]}}</li>
+                                <br>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
         </section>      
     </header>
@@ -38,6 +45,9 @@
     </div>
     <div class="main-content">
         <p><em>Fancy slideshow of basic outdoorsy people coming. Stay tuned.</em></p>
+        {% for user in users %}
+        <p>{{user.owner}}</p>
+        {% endfor %}
     </div>
     <footer>
         <ul class="contact">

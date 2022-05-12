@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from app import app
+from cart import Cart
 
 import pytest
 
@@ -29,6 +30,10 @@ def test_about():
         assert response.status_code == 200
         assert b"<title>About Page</title>" in response.data
 
+
+def test_cart():
+    user = Cart('user')
+    assert user.owner == 'user'
 
 
 # API_URL = "http://127.0.0.1:5000"

@@ -50,11 +50,24 @@
             </tr>
             {% for product in products[1:] %}
             <tr>
-                <td>image</td>
+                {% for image in image_list %}
+                {% if image[:-4] == product[1] %}
+                <td><img src="/static/product_image/{{image}}" alt="Image not found" width="80pxpx"></td>
+                {% endif %}
+                {% endfor %}
                 {% for item in product %}
                 <td>{{item}}</td>
                 {% endfor %}
-                <td><input type="button" value="Add to Cart"></td>
+                <td>
+                    <form action="/add-to-cart" class="add-to-cart-btn" method="post">
+                        <input type="hidden" name="p-id" value="{{product[0]}}">
+                        <input type="hidden" name="p-name" value="{{product[1]}}">
+                        <input type="hidden" name="p-cost" value="{{product[2]}}">
+                        <input type="hidden" name="p-desc" value="{{product[3]}}">
+                        <input type="hidden" name="p-cat" value="{{product[4]}}">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </td>
             </tr>
             {%endfor%}
         </table>
