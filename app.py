@@ -31,7 +31,7 @@ def products():
             product_list = list(csv.reader(file))
             images = os.listdir('static/product_image')
 
-        return render_template('/products.html', products=product_list, image_list=images)
+        return render_template('/products.html', products=product_list, image_list=images, users=LIVE_SESSIONS)
     else:
         return "<h1>No Products to display</h1><h2>Please visit us at a later time.</h2>"
 
@@ -53,7 +53,7 @@ def about():
         if user.owner == request.remote_addr:
             for item in user.list:
                 print(item)
-    return render_template('about.html')
+    return render_template('about.html', users=LIVE_SESSIONS)
 
 
 @app.route('/admin/dashboard', methods=['POST'])
@@ -87,7 +87,23 @@ def add_to_cart():
             if user.owner == request.remote_addr:
                 user.list.append(product)
     
-    return redirect('/products')
+    return redirect(request.referrer)
+
+
+@app.route("/del-cart-item", methods = ["GET", "POST"])
+def del_cart_item():
+    if request.method == 'POST':
+        p_id = request.form['p-id']
+        p_name = request.form['p-name']
+        p_cost = request.form['p-cost']
+        p_desc = request.form['p-desc']
+        p_cat = request.form['p-cat']
+        product = [p_id, p_name, p_cost, p_desc, p_cat]
+
+        for user in LIVE_SESSIONS:
+            if user.owner == request.remote_addr:
+                user.list.remove(product)
+    return redirect(request.referrer)
 
 
 if __name__ == "__main__":
