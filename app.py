@@ -1,3 +1,4 @@
+from ssl import HAS_TLSv1_1
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from cart import Cart
 import os
@@ -5,10 +6,13 @@ import json
 import csv
 
 app = Flask(__name__)
-app.secret_key = "sdfsanfdjksdbafkjsah"
+app.secret_key = "super-secret-key"
 
 LIVE_SESSIONS = []
 active_cart = []
+
+products_file_path = os.path.join('admin-only', 'products.csv')
+login_file_path = os.path.join('admin-only', 'creds.json')
 
 
 @app.route('/')
@@ -26,8 +30,8 @@ def homepage():
 
 @app.route('/products')
 def products():
-    if os.path.exists('products.csv'):
-        with open('products.csv', 'r') as file:
+    if os.path.exists(products_file_path):
+        with open(products_file_path, 'r') as file:
             product_list = list(csv.reader(file))
             images = os.listdir('static/product_image')
 
@@ -39,12 +43,15 @@ def products():
 
 @app.route('/admin')
 def admin():
-    with open('creds.json', 'r') as creds:
-            admin_list = json.loads(creds.read())
-            for admin in admin_list:
-                if admin['email'] in session.values():
-                    return render_template('admin_dashboard.html', user=admin['name'])
-            return render_template('admin-login.html')
+    if os.path.exists(login_file_path):
+        with open(login_file_path, 'r') as creds:
+                admin_list = json.loads(creds.read())
+                for admin in admin_list:
+                    if admin['email'] in session.values():
+                        return render_template('admin_dashboard.html', user=admin['name'])
+                return render_template('admin-login.html')
+    else:
+        return '<h1>Admin Portal not set up. Please use static features. '
 
 
 @app.route('/about')
