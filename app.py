@@ -1,9 +1,9 @@
-from ssl import HAS_TLSv1_1
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from cart import Cart
 import os
 import json
 import csv
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "super-secret-key"
@@ -11,8 +11,8 @@ app.secret_key = "super-secret-key"
 LIVE_SESSIONS = []
 active_cart = []
 
-products_file_path = os.path.join('admin-only', 'products.csv')
-login_file_path = os.path.join('admin-only', 'creds.json')
+products_file_path = os.path.join(app.root_path, 'admin-only')
+login_file_path = os.path.join(app.root_path, 'admin-only', 'creds.json')
 
 TRANSACTIONS = {}
 
@@ -31,8 +31,8 @@ def homepage():
 
 @app.route('/products')
 def products():
-    if os.path.exists(products_file_path):
-        with open(products_file_path, 'r') as file:
+    if os.path.exists(os.path.join(products_file_path, 'products.csv')):
+        with open(os.path.join(products_file_path, 'products.csv'), 'r') as file:
             product_list = list(csv.reader(file))
             images = os.listdir('static/product_image')
 
@@ -67,7 +67,7 @@ def about():
 @app.route('/admin/dashboard', methods=['POST'])
 def dashboard():
     if request.method == 'POST':
-        with open('creds.json', 'r') as creds:
+        with open(login_file_path, 'r') as creds:
             admin_list = json.loads(creds.read())
             email, password = request.form['email'], request.form['password']
             for admin in admin_list:
@@ -114,6 +114,15 @@ def del_cart_item():
                 user - product
                 user.update_total(float(product[2][1:]) * -1)
     return redirect(request.referrer)
+
+@app.route('/update-inventory', methods = ["GET", "POST"])
+def update_inventory():
+    if request.method == 'POST':
+        filename = request.files['file-name']
+        filename.save(os.path.join(products_file_path, secure_filename('products.csv')))
+        print(filename)
+
+        return redirect('/admin')
 
 
 if __name__ == "__main__":
