@@ -10,8 +10,8 @@ class Cart:
         if item in self.list: self.list.remove(item)
         else: print('Item not in the cart')
 
-    def add_item(self, item):
-        self.list.append(item)
+    def clear_cart(self):
+        self.list = []
 
 if __name__ == "__main__":
     pass
