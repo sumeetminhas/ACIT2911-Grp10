@@ -24,7 +24,7 @@
                     {% for user in users %}
                         {% if user.owner == request.remote_addr %}
                             {% for item in user.list %}
-                                <form action="/del-cart-item" method="post">
+                                <form action="/del-cart-item" method="post" class="cart-item-form">
                                     <li class="cart-item" style="display: flex; flex-direction: row; justify-content: space-between;">
                                         <div class="product-item">{{item[1]}}</div>
                                         <input type="hidden" name="p-id" value="{{item[0]}}">

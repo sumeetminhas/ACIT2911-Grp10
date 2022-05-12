@@ -243,4 +243,9 @@ footer {
     width: 150px;
     font-size: 20px;
     color: #800000;
+    padding: 15px 0 15px;
+}
+
+.cart-item-form {
+    border: 2px solid black;
 }
