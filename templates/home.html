@@ -37,9 +37,26 @@
                                         </button>
                                     </li>
                                 </form>
-                                
-                                <br>
                             {% endfor %}
+                            <div class="class-total">
+                                <div>Total</div>
+                                <div class="cart-total">
+                                    <ul>
+                                        <li class="cart-total-list">
+                                            <div>Total Cost</div>
+                                            <div>${{user.total}}</div>
+                                        </li>
+                                        <li class="cart-total-list">
+                                            <div>Taxes</div>
+                                            <div>${{ "%.2f"|format(user.total * 0.12) }}</div>
+                                        </li>
+                                        <li class="cart-total-list" id="cart-total">
+                                            <div>Total Cost</div>
+                                            <div>${{ "%.2f"|format(user.total + user.total * 0.12) }}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         {% endif %}
                     {% endfor %}
                 {% endif %}

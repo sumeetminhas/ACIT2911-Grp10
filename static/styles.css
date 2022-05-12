@@ -249,3 +249,15 @@ footer {
 .cart-item-form {
     border: 2px solid black;
 }
+
+.cart-total > ul {
+    padding: 0
+}
+
+.cart-total-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    padding: 0;
+}

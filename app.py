@@ -14,6 +14,7 @@ active_cart = []
 products_file_path = os.path.join('admin-only', 'products.csv')
 login_file_path = os.path.join('admin-only', 'creds.json')
 
+TRANSACTIONS = {}
 
 @app.route('/')
 def homepage():
@@ -92,7 +93,8 @@ def add_to_cart():
 
         for user in LIVE_SESSIONS:
             if user.owner == request.remote_addr:
-                user.list.append(product)
+                user + product
+                user.update_total(float(product[2][1:]))
     
     return redirect(request.referrer)
 
@@ -109,7 +111,8 @@ def del_cart_item():
 
         for user in LIVE_SESSIONS:
             if user.owner == request.remote_addr:
-                user.list.remove(product)
+                user - product
+                user.update_total(float(product[2][1:]) * -1)
     return redirect(request.referrer)
 
 
