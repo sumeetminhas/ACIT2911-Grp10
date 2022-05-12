@@ -24,9 +24,9 @@
     <div class="feature-area">
         <div class="update-product">
             Modify Product List
-            <form action="/update-inventory" method="post" class="update-product-list">
+            <form action="/update-inventory" method="post" class="update-product-list" enctype="multipart/form-data">
                 <label for="file-name">Upload File</label>
-                <input type="file" name="file-name" placeholder="Enter file path">
+                <input type="file" name="file-name">
                 <input type="submit" value="Submit">
             </form>
         </div>
