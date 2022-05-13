@@ -32,12 +32,12 @@ header h1 {
 
 #side-content {
     background-color: #fff1c2;
-    color: #202a44;
+    color: #800000;
     padding-left: 15px;
     padding-right:20px;
     border-width: 5px;
     border-radius: 3px;
-    width: 130px;
+    width: 260px;
     height: 300px;
     border-color: #202a44;
     border-style: double;
@@ -237,4 +237,40 @@ footer {
     font-size: 25px;
     color: white;
     list-style: none;
+}
+
+.product-item {
+    width: 150px;
+    font-size: 20px;
+    color: #800000;
+    padding: 15px 0 15px;
+}
+
+.cart-item-form {
+    border: 2px solid black;
+}
+
+.cart-total > ul {
+    padding: 0
+}
+
+.cart-total-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 20px;
+    padding: 0;
+}
+
+.checkout-btn {
+    width: fit-content;
+    border: 2px solid green;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkout-btn:hover {
+    background-color:#800000;
+    color: #fbf3de;
 }
