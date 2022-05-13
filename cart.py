@@ -4,16 +4,18 @@ class Cart:
         self.list = []
 
     def addItem(self, item):
-        pass
+        """ adds an item to the list"""
+        if item not in self.list:
+            self.list.append(item)
 
-#     def __add__(self, item):
-#         self.list.append(item)
+    def __add__(self, item):
+        self.list.append(item)
 
-#     def __sub__(self, item):
-#         if item in self.list:
-#             self.list.remove(item)
-#         else:
-#             print('Item not in the cart')
+    def __sub__(self, item):
+        if item in self.list:
+            self.list.remove(item)
+        # else:
+        #     raise ValueError
 
 
 if __name__ == "__main__":
