@@ -66,8 +66,8 @@ header h1 {
 
 .checkout-btn {
     margin-top: 20px;
-    width: 100px;
-    height: 40px;
+    width: 80px;
+    height: 30px;
     border-color:#000000;
     border-style: solid;
     border-width: 2px;
@@ -77,12 +77,12 @@ header h1 {
     justify-content: center;
     align-items: center;
     padding-bottom: 3px;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .checkout-btn:hover {
-    border-color: #005589;
-    background-color:#005589;
+    border-color: #01446e;
+    background-color:#01446e;
     color: #FFFFFF;
 }
 
