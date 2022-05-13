@@ -13,6 +13,7 @@ active_cart = []
 
 products_file_path = os.path.join(app.root_path, 'admin-only')
 login_file_path = os.path.join(app.root_path, 'admin-only', 'creds.json')
+transactions_file_path = os.path.join(app.root_path, 'admin-only', 'transactions.json')
 
 TRANSACTIONS = {}
 
@@ -123,6 +124,22 @@ def update_inventory():
         print(filename)
 
         return redirect('/admin')
+
+@app.route('/checkout', methods=["POST", "GET"])
+def checkout():
+    if request.method == "POST":
+        for user in LIVE_SESSIONS:
+            if user.owner == request.remote_addr:
+                with open(transactions_file_path, 'r') as all_history:
+                    TRANSACTIONS[user.owner] = {
+                        "products": user.list,
+                        "Amount": user.total
+                    }
+                    user.clear_cart()
+        
+    return TRANSACTIONS
+
+                    
 
 
 if __name__ == "__main__":
