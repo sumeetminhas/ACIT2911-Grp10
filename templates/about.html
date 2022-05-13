@@ -30,9 +30,16 @@
             </button>
             <div id="side-content">
                 <button id="back">></button>
-                <p>item one<p>
-                <p>item two</p>
-                <p>item three</p>
+                {% if users %}
+                    {% for user in users %}
+                        {% if user.owner == request.remote_addr %}
+                            {% for item in user.list %}
+                                <p class="cart-item">{{item[1]}}</p>
+                                <br>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
         </section>
     </div>

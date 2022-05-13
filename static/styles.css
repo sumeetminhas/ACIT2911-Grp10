@@ -64,6 +64,18 @@ header h1 {
 
 #side-content p:hover {
     color:#f69d3c;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #202a44;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right:20px;
+    border-width: 10px;
+    border-radius: 3px;
+    width: 150px;
+    height: 80vh;
 }
 
 #back {
@@ -237,4 +249,10 @@ footer {
     font-family: 'Arvo', serif;
     padding: 20px;
     background-color: #FFFFFF;
+}
+
+.cart-item {
+    font-size: 25px;
+    color: white;
+    list-style: none;
 }

@@ -13,7 +13,29 @@
 </head>
 <body>
     <header class="header">
+<<<<<<< HEAD
         <h1>One Stop Shop</h1>  
+=======
+        <h1>One Stop Shop</h1>
+        <section id="side-nav">
+            <button id="cart-logo">
+                <img src="../static/shopping-cart.jpg" alt="Cart icon" width="40px">
+            </button>
+            <div id="side-content">
+                <button id="back">></button>
+                {% if users %}
+                    {% for user in users %}
+                        {% if user.owner == request.remote_addr %}
+                            {% for item in user.list %}
+                                <li class="cart-item">{{item[1]}}</li>
+                                <br>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </section>      
+>>>>>>> 553e11e0dd14584b220f7082e3959a40f3a4bfbf
     </header>
     <div class="body">
         <nav class="nav-bar">
@@ -38,6 +60,9 @@
     </div>
     <div class="main-content">
         <p><em>Fancy slideshow of basic outdoorsy people coming. Stay tuned.</em></p>
+        {% for user in users %}
+        <p>{{user.owner}}</p>
+        {% endfor %}
     </div>
     <footer>
         <ul class="contact">

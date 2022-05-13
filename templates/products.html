@@ -30,12 +30,16 @@
             </button>
             <div id="side-content">
                 <button id="back">></button>
-                <p>item one<p>
-                <p>item two</p>
-                <p>item three</p>
-                <p>item four</p>
-                <p>item five</p>
-                <p>test test test test test test test test test test test test</p>
+                {% if users %}
+                    {% for user in users %}
+                        {% if user.owner == request.remote_addr %}
+                            {% for item in user.list %}
+                                <p class="cart-item">{{item[1]}}</p>
+                                <br>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             </div>
         </section>
     </div>
@@ -50,11 +54,24 @@
             </tr>
             {% for product in products[1:] %}
             <tr>
-                <td>image</td>
+                {% for image in image_list %}
+                {% if image[:-4] == product[1] %}
+                <td><img src="/static/product_image/{{image}}" alt="Image not found" width="80pxpx"></td>
+                {% endif %}
+                {% endfor %}
                 {% for item in product %}
                 <td>{{item}}</td>
                 {% endfor %}
-                <td><input type="button" value="Add to Cart"></td>
+                <td>
+                    <form action="/add-to-cart" class="add-to-cart-btn" method="post">
+                        <input type="hidden" name="p-id" value="{{product[0]}}">
+                        <input type="hidden" name="p-name" value="{{product[1]}}">
+                        <input type="hidden" name="p-cost" value="{{product[2]}}">
+                        <input type="hidden" name="p-desc" value="{{product[3]}}">
+                        <input type="hidden" name="p-cat" value="{{product[4]}}">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </td>
             </tr>
             {%endfor%}
         </table>
