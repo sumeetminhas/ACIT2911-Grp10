@@ -261,3 +261,16 @@ footer {
     font-size: 20px;
     padding: 0;
 }
+
+.checkout-btn {
+    width: fit-content;
+    border: 2px solid green;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkout-btn:hover {
+    background-color:#800000;
+    color: #fbf3de;
+}
