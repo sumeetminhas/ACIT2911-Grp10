@@ -196,6 +196,8 @@ a:hover {
     overflow:break-word;
     width: 360px;
     border-bottom: 2px solid #ddd;
+    font-family: 'Arvo', serif;
+    font-size: 14px;
 }
 
 .main-content button{
