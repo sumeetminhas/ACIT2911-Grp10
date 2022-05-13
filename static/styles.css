@@ -7,13 +7,12 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-family: 'IBM Plex Sans Condensed', sans-serif; 
-    color:#000000;
-    font-size: 3rem;
+    font-family: 'Kanit', sans-serif;
+    color: #202a44;
 }
 
 header h1 {
-    font-size: 50px;
+    font-size: 80px;
 }
 
 .body {
@@ -119,9 +118,7 @@ button {
     padding: 0;
 }
 h2 {
-    font-family: 'IBM Plex Sans Condensed', sans-serif; 
-    color:#000000;
-    font-size: 40px;
+    font-family: 'Kanit', sans-serif;
     color:#000000;
     font-size: 30px;
     padding-left: 20px;  
@@ -192,12 +189,19 @@ a:hover {
 }
 
 .main-content td {
+    padding-top: 10px;
     text-align: center;
     overflow:break-word;
     width: 360px;
     border-bottom: 2px solid #ddd;
     font-family: 'Arvo', serif;
     font-size: 14px;
+}
+
+.main-content img {
+    border-style: double;
+    border-width: 5px;
+    border-color: #000000;
 }
 
 .main-content button{
