@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=IBM+Plex+Sans+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Kanit:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
     <title>Admin dashboard</title>
 </head>
@@ -17,16 +17,16 @@
     <div class="body">
         <nav class="nav-bar">
             <ul class ='nav-area'>
-                <li class="nav-list welcome-prompt">Welcome {{user}}</li>
+                <p class="nav-list welcome-prompt">Welcome {{user}}</p>
             </ul>
         </nav>
     </div>
     <div class="feature-area">
         <div class="update-product">
             Modify Product List
-            <form action="/update-inventory" method="post" class="update-product-list">
+            <form action="/update-inventory" method="post" class="update-product-list" enctype="multipart/form-data">
                 <label for="file-name">Upload File</label>
-                <input type="file" name="file-name" placeholder="Enter file path">
+                <input type="file" name="file-name">
                 <input type="submit" value="Submit">
             </form>
         </div>
@@ -35,4 +35,3 @@
     </div>
 </body>
 </html>
-

@@ -6,24 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=IBM+Plex+Sans+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Kanit:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
     <script defer src="../static/app.js"></script>
     <title>About Page</title>
 </head>
 <body>
     <header class="header">
-        <h1>One stop Shop</h1>
-        <section id="side-nav">
-            <button id="cart-logo">
-                <img src="../static/shopping-cart.jpg" alt="Cart icon" width="40px">
-            </button>
-            <div id="side-content">
-                <button id="back">></button>
-                <a href="#">item one</a>
-                <a href="#">item two</a>
-            </div>
-        </section>
+        <h1>One Stop Shop</h1>
     </header>
     <div class="body">
         <nav class="nav-bar">
@@ -34,6 +24,59 @@
                 <li class="nav-list"><a href="/about">about</a></li>
             </ul>
         </nav>
+        <section id="side-nav">
+            <button id="cart-logo">
+                <img src="../static/icons/shopping-cart.jpg" alt="Cart icon" width="40px">
+            </button>
+            <div id="side-content">
+                <button id="back">></button>
+                {% if users %}
+                    {% for user in users %}
+                        {% if user.owner == request.remote_addr %}
+                            {% for item in user.list %}
+                                <form action="/del-cart-item" method="post">
+                                    <li class="cart-item" style="display: flex; flex-direction: row; justify-content: space-between;">
+                                        <div class="product-item" style="width: 700px; font-size: 20px;">{{item[1]}}</div>
+                                        <input type="hidden" name="p-id" value="{{item[0]}}">
+                                        <input type="hidden" name="p-name" value="{{item[1]}}">
+                                        <input type="hidden" name="p-cost" value="{{item[2]}}">
+                                        <input type="hidden" name="p-desc" value="{{item[3]}}">
+                                        <input type="hidden" name="p-cat" value="{{item[4]}}">
+                                        <button class="del-item" type="submit" style="width: 40px; height: 40px;">
+                                            <img src="../static/icons/delete-icon.jpg" alt="delete" width="18px">
+                                        </button>
+                                    </li>
+                                </form>
+                            {% endfor %}
+                            <div class="class-total">
+                                <div style="color:#b92200;">Total</div>
+                                <div class="cart-total">
+                                    <ul>
+                                        <li class="cart-total-list ">
+                                            <div>Cost</div>
+                                            <div>${{user.total}}</div>
+                                        </li>
+                                        <li class="cart-total-list">
+                                            <div>Taxes</div>
+                                            <div>${{ "%.2f"|format(user.total * 0.12) }}</div>
+                                        </li>
+                                        <li class="cart-total-list" id="cart-total" style="color:#b92200;">
+                                            <div>Total Cost</div>
+                                            <div>${{ "%.2f"|format(user.total + user.total * 0.12) }}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <form action="/checkout" method="post" class="checkout">
+                    <button type="submit" class="checkout-btn">
+                        <div>Checkout</div>
+                    </button>
+                </form>
+            </div>
+        </section>
     </div>
     <div class="about-section">
         <h2>About Us</h2>
