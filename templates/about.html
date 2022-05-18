@@ -6,14 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=IBM+Plex+Sans+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Kanit:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
     <script defer src="../static/app.js"></script>
     <title>About Page</title>
 </head>
 <body>
     <header class="header">
-        <h1>One stop Shop</h1>
+        <h1>One Stop Shop</h1>
+    </header>
+    <div class="body">
+        <nav class="nav-bar">
+            <ul class ='nav-area'>
+                <li class="nav-list"><a href="/">Homepage</a></li>
+                <li class="nav-list"><a href="/products">Product List</a></li>
+                <li class="nav-list"><a href="/admin">Admin Portal</a></li>
+                <li class="nav-list"><a href="/about">about</a></li>
+            </ul>
+        </nav>
         <section id="side-nav">
             <button id="cart-logo">
                 <img src="../static/icons/shopping-cart.jpg" alt="Cart icon" width="40px">
@@ -26,31 +36,31 @@
                             {% for item in user.list %}
                                 <form action="/del-cart-item" method="post">
                                     <li class="cart-item" style="display: flex; flex-direction: row; justify-content: space-between;">
-                                        <div class="product-item" style="width: 150px; font-size: 20px;">{{item[1]}}</div>
+                                        <div class="product-item" style="width: 700px; font-size: 20px;">{{item[1]}}</div>
                                         <input type="hidden" name="p-id" value="{{item[0]}}">
                                         <input type="hidden" name="p-name" value="{{item[1]}}">
                                         <input type="hidden" name="p-cost" value="{{item[2]}}">
                                         <input type="hidden" name="p-desc" value="{{item[3]}}">
                                         <input type="hidden" name="p-cat" value="{{item[4]}}">
-                                        <button class="del-item" type="submit" style="width: 30px; height: 30px;">
-                                            <img src="../static/icons/delete-icon.jpg" alt="delete" width="15px">
+                                        <button class="del-item" type="submit" style="width: 40px; height: 40px;">
+                                            <img src="../static/icons/delete-icon.jpg" alt="delete" width="18px">
                                         </button>
                                     </li>
                                 </form>
                             {% endfor %}
                             <div class="class-total">
-                                <div>Total</div>
+                                <div style="color:#b92200;">Total</div>
                                 <div class="cart-total">
                                     <ul>
-                                        <li class="cart-total-list">
-                                            <div>Total Cost</div>
+                                        <li class="cart-total-list ">
+                                            <div>Cost</div>
                                             <div>${{user.total}}</div>
                                         </li>
                                         <li class="cart-total-list">
                                             <div>Taxes</div>
                                             <div>${{ "%.2f"|format(user.total * 0.12) }}</div>
                                         </li>
-                                        <li class="cart-total-list" id="cart-total">
+                                        <li class="cart-total-list" id="cart-total" style="color:#b92200;">
                                             <div>Total Cost</div>
                                             <div>${{ "%.2f"|format(user.total + user.total * 0.12) }}</div>
                                         </li>
@@ -67,16 +77,6 @@
                 </form>
             </div>
         </section>
-    </header>
-    <div class="body">
-        <nav class="nav-bar">
-            <ul class ='nav-area'>
-                <li class="nav-list"><a href="/">Homepage</a></li>
-                <li class="nav-list"><a href="/products">Product List</a></li>
-                <li class="nav-list"><a href="/admin">Admin Portal</a></li>
-                <li class="nav-list"><a href="/about">about</a></li>
-            </ul>
-        </nav>
     </div>
     <div class="about-section">
         <h2>About Us</h2>
