@@ -6,34 +6,33 @@ import pytest
 
 flask_app = app
 
+
 def test_homepage():
     with flask_app.test_client() as test_client:
         response = test_client.get('/')
         assert response.status_code == 200
         assert b"<title>Homepage</title>" in response.data
 
+
 def test_products():
     with flask_app.test_client() as test_client:
         response = test_client.get('/products')
         assert response.status_code == 200
         assert b"<title>Products - One Stop Shop</title>" in response.data
-        
+
+
 def test_admin():
     with flask_app.test_client() as test_client:
         response = test_client.get('/admin')
         assert response.status_code == 200
         assert b"<title>Admin Login</title>" in response.data
 
+
 def test_about():
     with flask_app.test_client() as test_client:
         response = test_client.get('/about')
         assert response.status_code == 200
         assert b"<title>About Page</title>" in response.data
-
-
-def test_cart():
-    user = Cart('user')
-    assert user.owner == 'user'
 
 
 # API_URL = "http://127.0.0.1:5000"
@@ -107,6 +106,5 @@ def test_cart():
 #         print("-" * 80)
 #         func()
 #         print()
-
 if __name__ == "__main__":
     test_homepage()
