@@ -3,6 +3,7 @@ from cart import Cart
 import os
 import json
 import csv
+from functions import read_products
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -14,6 +15,8 @@ active_cart = []
 products_file_path = os.path.join(app.root_path, 'admin-only')
 login_file_path = os.path.join(app.root_path, 'admin-only', 'creds.json')
 transactions_file_path = os.path.join(app.root_path, 'admin-only', 'transactions.json')
+
+PRODUCT_LIST, IMAGES = read_products()
 
 TRANSACTIONS = {}
 
@@ -33,11 +36,7 @@ def homepage():
 @app.route('/products')
 def products():
     if os.path.exists(os.path.join(products_file_path, 'products.csv')):
-        with open(os.path.join(products_file_path, 'products.csv'), 'r') as file:
-            product_list = list(csv.reader(file))
-            images = os.listdir('static/product_image')
-
-        return render_template('/products.html', products=product_list, image_list=images, users=LIVE_SESSIONS)
+            return render_template('/products.html', products=PRODUCT_LIST, image_list=IMAGES, users=LIVE_SESSIONS)
     else:
         return "<h1>No Products to display</h1><h2>Please visit us at a later time.</h2>"
 
@@ -96,6 +95,11 @@ def add_to_cart():
             if user.owner == request.remote_addr:
                 user + product
                 user.update_total(float(product[2][1:]))
+
+                for item in PRODUCT_LIST:
+                    if item[1] == product[1]:
+                        item[5] = int(item[5]) - 1
+                
     
     return redirect(request.referrer)
 
