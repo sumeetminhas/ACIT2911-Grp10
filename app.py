@@ -49,8 +49,8 @@ def admin():
                 admin_list = json.loads(creds.read())
                 for admin in admin_list:
                     if admin['email'] in session.values():
-                        return redirect('admin/dashboard')
-                return redirect(url_for('login'))
+                        return render_template('admin/dashboard', user=admin['name'])
+                return render_template('admin-login.html')
     else:
         return '<h1>Admin Portal not set up. Please use static features. '
 
