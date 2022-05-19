@@ -23,15 +23,33 @@
     </div>
     <div class="feature-area">
         <div class="update-product">
-            Modify Product List
+            <h3>Modify Product List</h3>
             <form action="/update-inventory" method="post" class="update-product-list" enctype="multipart/form-data">
                 <label for="file-name">Upload File</label>
                 <input type="file" name="file-name">
                 <input type="submit" id="submitBtn" value="Submit">
             </form>
         </div>
-        <div class="trans-list">List of transactions</div>
-        <div class="item-deficit">Items required to be re-ordered</div>
+        <div class="trans-list">
+            <h3>Recent Transactions</h3>
+        </div>
+        <div class="item-deficit">
+            <h3>Items in deficit</h3>
+            <table class="product-inventory">
+                <tr class="inventory-item">
+                    <th>Product Name</th>
+                    <th>in Stock</th>
+                </tr>
+                {% for item in products[1:] %}
+                    {% if item[5]|int <= 10 %}
+                        <tr class="inventory-item">
+                            <td>{{ item[1] }}</td>
+                            <td>{{ item[5] }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
     </div>
 </body>
 </html>
