@@ -31,7 +31,23 @@
             </form>
         </div>
         <div class="trans-list">List of transactions</div>
-        <div class="item-deficit">Items required to be re-ordered</div>
+        <div class="item-deficit">
+            <div>Items in deficit</div>
+            <table class="product-inventory">
+                <tr class="inventory-item">
+                    <th>Product Name</th>
+                    <th>in Stock</th>
+                </tr>
+                {% for item in products[1:] %}
+                    {% if item[5]|int <= 10 %}
+                        <tr class="inventory-item">
+                            <td>{{ item[1] }}</td>
+                            <td>{{ item[5] }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </div>
     </div>
 </body>
 </html>
