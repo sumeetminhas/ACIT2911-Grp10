@@ -21,15 +21,25 @@
             </ul>
         </nav>
     </div>
-    <div class="cart-content">
-        <tr class="">
+    <div class="main-content">
+        <table>
+            <tr>
+                <th>Products</th>
+                <th>Amount</th>
+            </tr>
             {% for key,value in product.items() %}
-            <td>
-                {{value['products']}}
-                {{value['Amount']}}
-            </td>
+                {% for element in value['products'] %}
+                    <tr>
+                        <td>
+                            {{value['products']}}
+                        </td>
+                        <td>
+                            {{value['Amount']}}
+                        </td>
+                    </tr>
+                    {% endfor %}
             {% endfor%}
-        </tr>
+        </table>
     </div>
 </body>
 </html>

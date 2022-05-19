@@ -144,8 +144,7 @@ def checkout():
     # return TRANSACTIONS
     return render_template('checkout.html', product=TRANSACTIONS)
 
-                    
-
+    
 
 if __name__ == "__main__":
     app.run(debug=True)

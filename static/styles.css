@@ -85,14 +85,6 @@ header h1 {
     color: #FFFFFF;
 }
 
-.cart-content {
-    background-color: #fbf3de;
-    padding: 10px;
-    border-width:5px;
-    border-style: double;
-    border-color: #000000;
-}
-
 .class-total {
     font-size: 20px;
     padding-top: 10px;
