@@ -23,16 +23,18 @@
     </div>
     <div class="feature-area">
         <div class="update-product">
-            Modify Product List
+            <h3>Modify Product List</h3>
             <form action="/update-inventory" method="post" class="update-product-list" enctype="multipart/form-data">
                 <label for="file-name">Upload File</label>
                 <input type="file" name="file-name">
                 <input type="submit" value="Submit">
             </form>
         </div>
-        <div class="trans-list">List of transactions</div>
+        <div class="trans-list">
+            <h3>Recent Transactions</h3>
+        </div>
         <div class="item-deficit">
-            <div>Items in deficit</div>
+            <h3>Items in deficit</h3>
             <table class="product-inventory">
                 <tr class="inventory-item">
                     <th>Product Name</th>
