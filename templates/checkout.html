@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Kanit:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <title>Admin dashboard</title>
+</head>
+<body>
+    <header class="header">
+        <h1>One Stop Shop</h1>
+    </header>
+    <div class="body">
+        <nav class="nav-bar">
+            <ul class ='nav-area'>
+                <p class="nav-list welcome-prompt">Please check for your receipt</p>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content">
+        <table>
+            <tr>
+                <th>Your Receipt</th>
+            </tr>
+            {% for key,value in product.items() %}
+                {% for element in value['products'] %}
+                    <tr>
+                        <td>
+                            {{value['products']}}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                <td>
+                    Total Cost: {{value['Amount']}}
+                </td>
+            {% endfor%}
+            <tr>
+                <td><button class="checkout-btn">Confirm</button></td>
+            </tr>
+        </table>
+        
+    </div>
+</body>
+</html>

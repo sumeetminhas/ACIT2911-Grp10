@@ -15,3 +15,4 @@ function closeSideNav(){
     navContent.style.display = 'none'
     btnCart.style.display = "block"
 }
+
