@@ -17,14 +17,14 @@
     <div class="body">
         <nav class="nav-bar">
             <ul class ='nav-area'>
-                <p class="nav-list welcome-prompt">Please check for your cart</p>
+                <p class="nav-list welcome-prompt">Please check for your receipt</p>
             </ul>
         </nav>
     </div>
     <div class="main-content">
         <table>
             <tr>
-                <th>Your Product Cart</th>
+                <th>Your Receipt</th>
             </tr>
             {% for key,value in product.items() %}
                 {% for element in value['products'] %}
@@ -39,6 +39,9 @@
                     Total Cost: {{value['Amount']}}
                 </td>
             {% endfor%}
+            <tr>
+                <td><button class="checkout-btn">Confirm</button></td>
+            </tr>
         </table>
         
     </div>
