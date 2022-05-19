@@ -152,10 +152,10 @@ def checkout():
                     }
                     user.clear_cart()
         
-    return TRANSACTIONS
+    # return TRANSACTIONS
+    return render_template('checkout.html', product=TRANSACTIONS)
 
-                    
-
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
