@@ -90,12 +90,12 @@
             {% for product in products[1:] %}
             <tr>
                 {% for image in image_list %}
-                {% if image[:-4] == product[1] %}
-                <td><img src="/static/product_image/{{image}}" alt="Image not found" width="80px"></td>
-                {% endif %}
+                    {% if image[:-4] == product[1] %}
+                    <td><img src="/static/product_image/{{image}}" alt="Image not found" width="80px"></td>
+                    {% endif %}
                 {% endfor %}
-                {% for item in product %}
-                <td>{{item}}</td>
+                    {% for item in product %}
+                    <td>{{item}}</td>
                 {% endfor %}
                 <td>
                     <form action="/add-to-cart" class="add-to-cart-btn" method="post">
