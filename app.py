@@ -49,8 +49,8 @@ def admin():
                 admin_list = json.loads(creds.read())
                 for admin in admin_list:
                     if admin['email'] in session.values():
-                        return render_template('admin_dashboard.html', user=admin['name'])
-                return render_template('admin-login.html')
+                        return redirect('admin/dashboard')
+                return redirect(url_for('login'))
     else:
         return '<h1>Admin Portal not set up. Please use static features. '
 
@@ -64,7 +64,7 @@ def about():
     return render_template('about.html', users=LIVE_SESSIONS)
 
 
-@app.route('/admin/dashboard', methods=['POST'])
+@app.route('/admin/dashboard', methods=['POST', 'GET'])
 def dashboard():
     if request.method == 'POST':
         with open(login_file_path, 'r') as creds:
@@ -76,10 +76,16 @@ def dashboard():
                 elif email == admin['email'] and password == admin['password']:
                     session["email"] = email
                     for item in session.values(): print(item)
-                    return render_template('admin_dashboard.html', user=admin['name'])
-            
+                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
             flash("Incorrect email or password. Try Again..")
             return redirect('/admin')
+
+    elif request.method == 'GET':
+        with open(login_file_path, 'r') as creds:
+            admin_list = json.loads(creds.read())
+            for admin in admin_list:
+                if admin['email'] in session.values(): 
+                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
 
 @app.route("/add-to-cart", methods = ['GET', 'POST'])
 def add_to_cart():
@@ -118,6 +124,11 @@ def del_cart_item():
             if user.owner == request.remote_addr:
                 user - product
                 user.update_total(float(product[2][1:]) * -1)
+            
+                for item in PRODUCT_LIST:
+                        if item[1] == product[1]:
+                            item[5] = int(item[5]) + 1
+
     return redirect(request.referrer)
 
 @app.route('/update-inventory', methods = ["GET", "POST"])
