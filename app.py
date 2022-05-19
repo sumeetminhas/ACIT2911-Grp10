@@ -118,6 +118,11 @@ def del_cart_item():
             if user.owner == request.remote_addr:
                 user - product
                 user.update_total(float(product[2][1:]) * -1)
+            
+                for item in PRODUCT_LIST:
+                        if item[1] == product[1]:
+                            item[5] = int(item[5]) + 1
+
     return redirect(request.referrer)
 
 @app.route('/update-inventory', methods = ["GET", "POST"])
