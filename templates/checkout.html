@@ -24,8 +24,7 @@
     <div class="main-content">
         <table>
             <tr>
-                <th>Products</th>
-                <th>Amount</th>
+                <th>Your Product Cart</th>
             </tr>
             {% for key,value in product.items() %}
                 {% for element in value['products'] %}
@@ -33,13 +32,15 @@
                         <td>
                             {{value['products']}}
                         </td>
-                        <td>
-                            {{value['Amount']}}
-                        </td>
+
                     </tr>
                     {% endfor %}
+                <td>
+                    Total Cost: {{value['Amount']}}
+                </td>
             {% endfor%}
         </table>
+        
     </div>
 </body>
 </html>
