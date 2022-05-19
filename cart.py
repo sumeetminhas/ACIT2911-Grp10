@@ -4,12 +4,19 @@ class Cart:
         self.list = []
         self.total = 0
 
+    def addItem(self, item):
+        """ adds an item to the list"""
+        if item not in self.list:
+            self.list.append(item)
+
     def __add__(self, item):
         self.list.append(item)
-    
+
     def __sub__(self, item):
-        if item in self.list: self.list.remove(item)
-        else: print('Item not in the cart')
+        if item in self.list:
+            self.list.remove(item)
+        # else:
+        #     raise ValueError
 
     def clear_cart(self):
         self.list = []
@@ -17,6 +24,7 @@ class Cart:
     
     def update_total(self, price):
         self.total += price
+
 
 if __name__ == "__main__":
     pass
