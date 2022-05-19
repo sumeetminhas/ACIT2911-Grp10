@@ -17,21 +17,19 @@
     <div class="body">
         <nav class="nav-bar">
             <ul class ='nav-area'>
-                <p class="nav-list welcome-prompt">Welcome {{user}}</p>
+                <p class="nav-list welcome-prompt">Please check for your cart</p>
             </ul>
         </nav>
     </div>
-    <div class="feature-area">
-        <div class="update-product">
-            Modify Product List
-            <form action="/update-inventory" method="post" class="update-product-list" enctype="multipart/form-data">
-                <label for="file-name">Upload File</label>
-                <input type="file" name="file-name">
-                <input type="submit" id="submitBtn" value="Submit">
-            </form>
-        </div>
-        <div class="trans-list">List of transactions</div>
-        <div class="item-deficit">Items required to be re-ordered</div>
+    <div class="cart-content">
+        <tr class="">
+            {% for key,value in product.items() %}
+            <td>
+                {{value['products']}}
+                {{value['Amount']}}
+            </td>
+            {% endfor%}
+        </tr>
     </div>
 </body>
 </html>
