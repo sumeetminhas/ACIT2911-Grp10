@@ -303,3 +303,9 @@ footer {
     padding: 20px;
     background-color: #FFFFFF;
 }
+
+.final-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
