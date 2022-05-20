@@ -36,7 +36,7 @@
                             {% for item in user.list %}
                                 <form action="/del-cart-item" method="post">
                                     <li class="cart-item" style="display: flex; flex-direction: row; justify-content: space-between;">
-                                        <div class="product-item" sstyle="width: 700px; font-size: 20px;">{{item[1]}}</div>
+                                        <div class="product-item" style="width: 700px; font-size: 20px;">{{item[1]}}</div>
                                         <input type="hidden" name="p-id" value="{{item[0]}}">
                                         <input type="hidden" name="p-name" value="{{item[1]}}">
                                         <input type="hidden" name="p-cost" value="{{item[2]}}">
