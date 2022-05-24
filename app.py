@@ -100,6 +100,10 @@ def dashboard():
             for admin in admin_list:
                 if admin['email'] in session.values():
                     return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
+
+                else:
+                    return redirect('/admin')
+
             return redirect('/admin')
 
 @app.route('/sign_out', methods=["GET"])
@@ -121,7 +125,6 @@ def about():
             for item in user.list:
                 print(item)
     return render_template('about.html', users=LIVE_SESSIONS)
-
 
 
 @app.route("/add-to-cart", methods = ['GET', 'POST'])
