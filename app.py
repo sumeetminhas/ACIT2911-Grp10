@@ -72,7 +72,7 @@ def admin():
                     elif email == admin['email'] and password == admin['password']:
                         session["email"] = email
                         for item in session.values(): print(item)
-                         return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
+                        return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
 
                 return render_template('admin-login.html')
     else:
