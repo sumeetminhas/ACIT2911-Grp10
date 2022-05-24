@@ -253,6 +253,15 @@ a:hover {
     color: #FFFFFF
 }
 
+.final-form {
+    padding-top: 10px;
+    overflow:break-word;
+    width: 400px;
+    border-bottom: 2px solid #ddd;
+    font-family: 'Arvo', serif;
+    font-size: 14px;
+}
+
 .product-inventory {
     display: flex;
     align-items: center;
