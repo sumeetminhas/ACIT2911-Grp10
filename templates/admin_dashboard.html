@@ -18,6 +18,9 @@
         <nav class="nav-bar">
             <ul class ='nav-area'>
                 <p class="nav-list welcome-prompt">Welcome {{user}}</p>
+                <form action="/sign_out" method="get">
+                    <input type="submit" value="Checkout">
+                </form>
             </ul>
         </nav>
     </div>
@@ -26,7 +29,7 @@
             <h3>Modify Product List</h3>
             <form action="/update-inventory" method="post" class="update-product-list" enctype="multipart/form-data">
                 <label for="file-name">Upload File</label>
-                <input type="file" name="file-name">
+                <input type="file" id="chooseFile" name="file-name">
                 <input type="submit" id="submitBtn" value="Submit">
             </form>
         </div>
