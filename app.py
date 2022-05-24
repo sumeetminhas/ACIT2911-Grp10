@@ -69,6 +69,11 @@ def admin():
                 for admin in admin_list:
                     if admin['email'] in session.values():
                         return redirect('admin/dashboard')
+                    elif email == admin['email'] and password == admin['password']:
+                        session["email"] = email
+                        for item in session.values(): print(item)
+                         return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
+
                 return render_template('admin-login.html')
     else:
         return '<h1>Admin Portal not set up. Please use static features. '
