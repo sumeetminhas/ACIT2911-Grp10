@@ -74,6 +74,41 @@ def admin():
         return '<h1>Admin Portal not set up. Please use static features. '
 
 
+@app.route('/admin/dashboard', methods=['POST', 'GET'])
+def dashboard():
+    if request.method == 'POST':
+        with open(login_file_path, 'r') as creds:
+            admin_list = json.loads(creds.read())
+            email, password = request.form['email'], request.form['password']
+            for admin in admin_list:
+                if admin['email'] in session.values(): 
+                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
+                elif email == admin['email'] and password == admin['password']:
+                    session["email"] = email
+                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
+            flash("Incorrect email or password. Try Again..")
+            return redirect('/admin')
+
+    elif request.method == 'GET':
+        with open(login_file_path, 'r') as creds:
+            admin_list = json.load(creds)
+            for admin in admin_list:
+                if admin['email'] in session.values():
+                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
+            return redirect('/admin')
+
+@app.route('/sign_out', methods=["GET"])
+def sign_out():
+    if request.method == "GET":
+        with open(login_file_path, 'r') as creds:
+            admin_list = json.load(creds)
+            for admin in admin_list:
+                if admin['email'] in session.values():
+                    session.clear()
+                    return redirect('admin')
+                
+    return redirect(url_for('admin'))
+
 @app.route('/about')
 def about():
     for user in LIVE_SESSIONS:
@@ -83,28 +118,6 @@ def about():
     return render_template('about.html', users=LIVE_SESSIONS)
 
 
-@app.route('/admin/dashboard', methods=['POST', 'GET'])
-def dashboard():
-    if request.method == 'POST':
-        with open(login_file_path, 'r') as creds:
-            admin_list = json.loads(creds.read())
-            email, password = request.form['email'], request.form['password']
-            for admin in admin_list:
-                if admin['email'] in session.values(): 
-                    return render_template('admin_dashboard.html', user=admin['name'])
-                elif email == admin['email'] and password == admin['password']:
-                    session["email"] = email
-                    for item in session.values(): print(item)
-                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
-            flash("Incorrect email or password. Try Again..")
-            return redirect('/admin')
-
-    elif request.method == 'GET':
-        with open(login_file_path, 'r') as creds:
-            admin_list = json.loads(creds.read())
-            for admin in admin_list:
-                if admin['email'] in session.values(): 
-                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
 
 @app.route("/add-to-cart", methods = ['GET', 'POST'])
 def add_to_cart():
