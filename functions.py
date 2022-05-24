@@ -13,3 +13,11 @@ def read_products():
             images = os.listdir('static/product_image')
 
             return product_list, images
+
+def read_json():
+    with open(transactions_file_path, 'r') as history:
+        return json.load(history)
+
+def update_history(list):
+    all_history = read_json()
+    return none

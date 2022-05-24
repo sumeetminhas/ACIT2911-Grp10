@@ -253,6 +253,29 @@ a:hover {
     color: #FFFFFF
 }
 
+.product-inventory {
+    display: flex;
+    align-items: center;
+    background-color: #fbf3de;
+    padding: 10px;
+}
+
+.product-inventory th {
+    text-align: center;
+    background-color: #FFFFFF;
+    width: 360px;
+}
+
+.product-inventory td {
+    padding-top: 10px;
+    text-align: center;
+    overflow:break-word;
+    width: 360px;
+    border-bottom: 2px solid #ddd;
+    font-family: 'Arvo', serif;
+    font-size: 14px;
+}
+
 .contact {
     display: flex;
     flex-direction: row;
@@ -293,6 +316,23 @@ footer {
     background-color: #fff1c2;
 }
 
+#submitBtn {
+    width: 80px;
+    height: auto;
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 5px;
+    border-width: 3px;
+    border-color: #000000;
+    border-style: solid;
+    font-size: 15px;
+}
+
+#submitBtn:hover {
+    background-color: #202a44;
+    color: #FFFFFF
+}
+
 .update-product, .trans-list, .item-deficit {
     height: 400px;
     width: 33%;
@@ -302,4 +342,10 @@ footer {
     font-family: 'Arvo', serif;
     padding: 20px;
     background-color: #FFFFFF;
+}
+
+.final-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }

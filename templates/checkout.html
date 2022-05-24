@@ -22,35 +22,64 @@
         </nav>
     </div>
     <div class="main-content">
-        <table>
-            <tr>
-                <th>Confirmation</th>
-            </tr>
-            <tr>
-                <th>Product Name</th>
-                <th>Product Price</th>
-                <th>Description</th>
-                <th>Category</th>
-            </tr>
-            {% for key,value in product.items() %}
-                {% for item in value["products"] %}
-                        <tr>
-                            {% for element in item[1:] %}
-                                <td>
-                                    {{element}}
-                                </td>
+        <form action="/confirm-checkout" method="post" class="final-form">
+            <label for="full-name">Full Name:</label>
+            <input type="text" name="full-name" placeholder="John doe" required><br>
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="someone@something.com" required>
+            <label for="phone-num">Phone number:</label>
+            <input type="number" name="phone-num" placeholder="123-456-7890" required><br>
+            <label for="address-st">Street Address</label>
+            <input type="text" name="address-st" placeholder="123 Awesome Ave" required>
+            <label for="address-st">City</label>
+            <input type="text" name="address-city" placeholder="Vancouver" required><br>
+            <label for="address-st">Country</label>
+            <input type="text" name="address-country" placeholder="Canada" required>
+            <label for="address-st">Postal Code</label>
+            <input type="text" name="address-code" placeholder="A1B2C3" required><br>
+            
+            {% if users %}
+                    {% for user in users %}
+                        {% if user.owner == request.remote_addr %}
+                            {% for item in user.list %}
+                                <form action="/del-cart-item" method="post">
+                                    <li class="cart-item" style="display: flex; flex-direction: row; justify-content: space-between;">
+                                        <div class="product-item" style="width: 700px; font-size: 20px;">{{item[1]}}</div>
+                                        <input type="hidden" name="p-id" value="{{item[0]}}">
+                                        <input type="hidden" name="p-name" value="{{item[1]}}">
+                                        <input type="hidden" name="p-cost" value="{{item[2]}}">
+                                        <input type="hidden" name="p-desc" value="{{item[3]}}">
+                                        <input type="hidden" name="p-cat" value="{{item[4]}}">
+                                        <button class="del-item" type="submit" style="width: 40px; height: 40px;">
+                                            <img src="../static/icons/delete-icon.jpg" alt="delete" width="18px">
+                                        </button>
+                                    </li>
+                                </form>
                             {% endfor %}
-                        </tr>
-                {% endfor %}
-                <p style="display: flex; justify-content: flex-end;">
-                    Total Cost: {{value['Amount']}}
-                </p>
-            {% endfor%}
-            <tr>
-                <td><button class="checkout-btn">Confirm</button></td>
-            </tr>
-        </table>
-        
+                            <div class="class-total">
+                                <div style="color:#b92200;">Total</div>
+                                <div class="cart-total">
+                                    <ul style="list-style: none;">
+                                        <li class="cart-total-list">
+                                            <div>Cost</div>
+                                            <div>${{ "%.2f"|format(user.total) }}</div>
+                                        </li>
+                                        <li class="cart-total-list">
+                                            <div>Taxes</div>
+                                            <div>${{ "%.2f"|format(user.total * 0.12) }}</div>
+                                        </li>
+                                        <li class="cart-total-list" id="cart-total" style="color:#b92200;">
+                                            <div>Total Cost</div>
+                                            <div>${{ "%.2f"|format(user.total + user.total * 0.12) }}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            <input type="submit" value="Checkout">
+        </form>
     </div>
 </body>
 </html>
