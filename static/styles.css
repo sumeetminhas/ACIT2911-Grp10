@@ -353,8 +353,34 @@ footer {
     background-color: #FFFFFF;
 }
 
+.update-product {
+    padding: 25px;
+    display: inline-block;
+}
+
+input[type=file] {
+    padding: 15px;
+    border: 2px solid #01446e;
+}
+
 .final-form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.history-table {
+    overflow-y: auto;
+    background-color:#fbf3de;
+}
+
+.history-table th, .history-table td {
+    border: 1px solid black;
+
+}
+
+.admin-dash {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

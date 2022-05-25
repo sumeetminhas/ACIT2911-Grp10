@@ -7,6 +7,7 @@ import json
 import csv
 from functions import read_products, read_json, add_to_history, class_to_dict, update_products
 from werkzeug.utils import secure_filename
+import datetime
 from flask_mail import Mail, Message
 
 app = Flask(__name__)
@@ -223,12 +224,16 @@ def email():
             "email": email,
             "address": address,
             "Product_list": comp_cart,
-            "Order-total": cart_total
+            "Order-total": cart_total,
+            "date": datetime.datetime.now().strftime("%c")
         }
 
         add_to_history(trans_summary, TRANSACTIONS)
 
-        return "Email has been sent"
+        return """
+        <h2>Order has been placed</h2>
+        <a href="/">Return to Homepage</a>
+        """
     
     else: 
         return redirect('/')
