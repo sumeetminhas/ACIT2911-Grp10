@@ -1,4 +1,5 @@
 import csv
+from encodings import utf_8
 import json
 import os
 from cart import Cart
@@ -10,6 +11,8 @@ transactions_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__))
 
 def read_products():
     with open(os.path.join(products_file_path, 'products.csv'), 'r') as file:
+            print(file)
+            print(type(file))
             product_list = list(csv.reader(file))
             images = os.listdir('static/product_image')
             image_list = []
@@ -36,3 +39,9 @@ def class_to_dict(instance):
         list_html += "</ul>"
 
         return list_html, instance.total
+
+def update_products(products):
+    with open(os.path.join(products_file_path, 'products2.csv'), 'w', encoding="UTF8", newline='') as file:
+        writer = csv.writer(file)
+        for product in products:
+            writer.writerow(product)
