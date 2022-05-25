@@ -1,10 +1,11 @@
 from email.message import Message
+from unicodedata import name
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from cart import Cart
 import os
 import json
 import csv
-from functions import read_products
+from functions import read_products, read_json, add_to_history, class_to_dict, update_products
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 
@@ -28,7 +29,7 @@ login_file_path = os.path.join(app.root_path, 'admin-only', 'creds.json')
 transactions_file_path = os.path.join(app.root_path, 'admin-only', 'transactions.json')
 
 PRODUCT_LIST, IMAGES = read_products()
-TRANSACTIONS = {}
+TRANSACTIONS = read_json()
 
 """Mail Server Settings"""
 app.config['MAIL_SERVER']='smtp.gmail.com'
@@ -55,25 +56,24 @@ def homepage():
 @app.route('/products')
 def products():
     if os.path.exists(os.path.join(products_file_path, 'products.csv')):
-            return render_template('/products.html', products=PRODUCT_LIST, image_list=IMAGES, users=LIVE_SESSIONS)
+        return render_template('/products.html', products=PRODUCT_LIST, image_list=IMAGES, users=LIVE_SESSIONS)
     else:
         return "<h1>No Products to display</h1><h2>Please visit us at a later time.</h2>"
 
 
 
-@app.route('/admin')
+@app.route('/admin', methods=["GET"])
 def admin():
-    if os.path.exists(login_file_path):
-        with open(login_file_path, 'r') as creds:
-                admin_list = json.loads(creds.read())
+    if request.method == "GET":
+        if os.path.exists(login_file_path):
+            with open(login_file_path, 'r') as creds:
+                admin_list = json.load(creds)
+                print(session.values())
                 for admin in admin_list:
+                    print(admin['email'])
                     if admin['email'] in session.values():
-                        return redirect('admin/dashboard')
-                    elif email == admin['email'] and password == admin['password']:
-                        session["email"] = email
-                        for item in session.values(): print(item)
-                        return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
-
+                        return redirect('/admin/dashboard')
+                
                 return render_template('admin-login.html')
     else:
         return '<h1>Admin Portal not set up. Please use static features. '
@@ -83,14 +83,14 @@ def admin():
 def dashboard():
     if request.method == 'POST':
         with open(login_file_path, 'r') as creds:
-            admin_list = json.loads(creds.read())
+            admin_list = json.load(creds)
             email, password = request.form['email'], request.form['password']
             for admin in admin_list:
                 if admin['email'] in session.values(): 
-                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
+                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST, history=TRANSACTIONS[::-1])
                 elif email == admin['email'] and password == admin['password']:
                     session["email"] = email
-                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
+                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST, history=TRANSACTIONS[::-1])
             flash("Incorrect email or password. Try Again..")
             return redirect('/admin')
 
@@ -99,10 +99,7 @@ def dashboard():
             admin_list = json.load(creds)
             for admin in admin_list:
                 if admin['email'] in session.values():
-                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST)
-
-                else:
-                    return redirect('/admin')
+                    return render_template('admin_dashboard.html', user=admin['name'], products=PRODUCT_LIST, history=TRANSACTIONS.reverse())
 
             return redirect('/admin')
 
@@ -145,8 +142,7 @@ def add_to_cart():
                 for item in PRODUCT_LIST:
                     if item[1] == product[1]:
                         item[5] = int(item[5]) - 1
-                
-    
+                update_products(PRODUCT_LIST)
     return redirect(request.referrer)
 
 
@@ -166,37 +162,29 @@ def del_cart_item():
                 user.update_total(float(product[2][1:]) * -1)
             
                 for item in PRODUCT_LIST:
-                        if item[1] == product[1]:
-                            item[5] = int(item[5]) + 1
+                    if item[1] == product[1]:
+                        item[5] = int(item[5]) + 1
+                update_products(PRODUCT_LIST)
 
     return redirect(request.referrer)
 
 @app.route('/update-inventory', methods = ["GET", "POST"])
 def update_inventory():
     if request.method == 'POST':
-        filename = request.files['file-name']
-        filename.save(os.path.join(products_file_path, secure_filename('products.csv')))
-        print(filename)
+        with open(os.path.join(products_file_path, 'products.csv'), 'r') as file:
+            file = request.files['file-name']
+            file.save(os.path.join(products_file_path, secure_filename('products.csv')))
+            print(file)
 
-        return redirect('/admin')
+        return redirect(request.referrer)
 
 @app.route('/checkout', methods=["POST", "GET"])
 def checkout():
     if request.method == "POST":
-        for user in LIVE_SESSIONS:
-            if user.owner == request.remote_addr:
-                with open(transactions_file_path, 'r') as all_history:
-                    TRANSACTIONS[user.owner] = {
-                        "products": user.list,
-                        "Amount": user.total
-                    }
-        
-    # return TRANSACTIONS
-    return render_template('checkout.html', product=TRANSACTIONS, users=LIVE_SESSIONS)
+        return render_template('checkout.html', product=TRANSACTIONS, users=LIVE_SESSIONS)
+    else:
+        return redirect('/')
 
-@app.route('/check')
-def check():
-    return TRANSACTIONS
 
 @app.route('/confirm-checkout', methods=['POST'])
 def email():
@@ -209,20 +197,41 @@ def email():
         addr_coun = request.form["address-country"]
         addr_code = request.form["address-code"]
         address = f"{addr_st}, {addr_city}, {addr_coun}, {addr_code}"
-        msg = Message("Order invoice: ",
+        for user in LIVE_SESSIONS:
+            if user.owner == request.remote_addr:
+                comp_cart, cart_total = class_to_dict(user)
+                user.clear_cart()
+        
+        msg = Message(f"Order invoice: {full_name}",
         sender='ostopshop10@gmail.com',
         recipients=[email])
-        product_data = '\n'
-        msg.body = "Order invoice from One Stop Shop"
-        print(msg)
-        mail.send(msg)
-    # for user in LIVE_SESSIONS:
-    #     if user.owner == request.remote_addr:
-    #         for item in user.list:
-    #             product_data += f"<li><div>{item[1]}   </div><div>{item[2]} </div></li><br>"
-    #         product_data += f"<li></li>"
-    # msg.body += product_data
-        return 'confirmation email sent'
+
+        msg.html = f"""
+            <p>Email: {email}</p>
+            <p>Phone No: {phone_num}</p>
+            <p>Address: {address}</p>
+            {comp_cart}
+            <br>
+            <p>Amount for Cart: {cart_total}</p>
+            <p>Taxes: {cart_total*0.12}</p>
+            <h3>Total amount: {cart_total * 1.12 }</h3>
+        """
+        # mail.send(msg)
+
+        trans_summary = {
+            "name": full_name,
+            "email": email,
+            "address": address,
+            "Product_list": comp_cart,
+            "Order-total": cart_total
+        }
+
+        add_to_history(trans_summary, TRANSACTIONS)
+
+        return "Email has been sent"
+    
+    else: 
+        return redirect('/')
     
 
 if __name__ == "__main__":

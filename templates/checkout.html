@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Kanit:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
-    <title>Admin dashboard</title>
+    <title>Confirm Checkout</title>
 </head>
 <body>
     <header class="header">
@@ -24,20 +24,21 @@
     <div class="main-content">
         <form action="/confirm-checkout" method="post" class="final-form">
             <label for="full-name">Full Name:</label>
-            <input type="text" name="full-name" placeholder="John doe" required><br>
+            <input type="text" name="full-name" placeholder="John doe" ><br>
             <label for="email">Email</label>
-            <input type="email" name="email" placeholder="someone@something.com" required>
+            <input type="email" name="email" placeholder="someone@something.com" >
             <label for="phone-num">Phone number:</label>
-            <input type="number" name="phone-num" placeholder="123-456-7890" required><br>
+            <input type="number" name="phone-num" placeholder="123-456-7890" ><br>
             <label for="address-st">Street Address</label>
-            <input type="text" name="address-st" placeholder="123 Awesome Ave" required>
+            <input type="text" name="address-st" placeholder="123 Awesome Ave" >
             <label for="address-st">City</label>
-            <input type="text" name="address-city" placeholder="Vancouver" required><br>
+            <input type="text" name="address-city" placeholder="Vancouver" ><br>
             <label for="address-st">Country</label>
-            <input type="text" name="address-country" placeholder="Canada" required>
+            <input type="text" name="address-country" placeholder="Canada" >
             <label for="address-st">Postal Code</label>
-            <input type="text" name="address-code" placeholder="A1B2C3" required><br>
-            
+            <input type="text" name="address-code" placeholder="A1B2C3" ><br>
+            <input type="submit" class="checkout-btn" value="Checkout">
+        </form>
             {% if users %}
                     {% for user in users %}
                         {% if user.owner == request.remote_addr %}
@@ -78,8 +79,6 @@
                         {% endif %}
                     {% endfor %}
                 {% endif %}
-            <input type="submit" class="checkout-btn" value="Checkout">
-        </form>
     </div>
 </body>
 </html>
