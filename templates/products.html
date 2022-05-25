@@ -89,11 +89,11 @@
             </tr>
             {% for product in products[1:] %}
             <tr>
-                {% for image in image_list %}
-                    {% if image[:-4] == product[1] %}
-                    <td><img src="/static/product_image/{{image}}" alt="Image not found" width="80px"></td>
+                    {% if product[1] in image_list %}
+                    <td><img src="/static/product_image/{{product[1]}}.jpg" alt="Image not found" width="80px"></td>
+                    {% else %}
+                    <td></td>
                     {% endif %}
-                {% endfor %}
                     {% for item in product %}
                     <td>{{item}}</td>
                 {% endfor %}
