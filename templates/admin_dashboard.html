@@ -35,6 +35,18 @@
         </div>
         <div class="trans-list">
             <h3>Recent Transactions</h3>
+            <table>
+                <tr>
+                    <th>Order Placed by</th>
+                    <th>Order Total</th>
+                </tr>
+            {% for order in history %}
+                <tr>
+                    <td>{{ order["name"] }}</td>
+                    <td>${{ order["Order-total"] }}</td>
+                </tr>
+            {% endfor %}
+            </table>
         </div>
         <div class="item-deficit">
             <h3>Items in deficit</h3>

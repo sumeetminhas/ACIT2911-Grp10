@@ -54,7 +54,7 @@
                                     <ul>
                                         <li class="cart-total-list">
                                             <div>Cost</div>
-                                            <div>${{user.total}}</div>
+                                            <div>${{ "%.2f"|format(user.total) }}</div>
                                         </li>
                                         <li class="cart-total-list">
                                             <div>Taxes</div>
@@ -89,6 +89,7 @@
             </tr>
             {% for product in products[1:] %}
             <tr>
+                {% if product[5]|int > 0 %}
                     {% if product[1] in image_list %}
                     <td><img src="/static/product_image/{{product[1]}}.jpg" alt="Image not found" width="80px"></td>
                     {% else %}
@@ -96,18 +97,19 @@
                     {% endif %}
                     {% for item in product %}
                     <td>{{item}}</td>
-                {% endfor %}
-                <td>
-                    <form action="/add-to-cart" class="add-to-cart-btn" method="post">
-                        <input type="hidden" name="p-id" value="{{product[0]}}">
-                        <input type="hidden" name="p-name" value="{{product[1]}}">
-                        <input type="hidden" name="p-cost" value="{{product[2]}}">
-                        <input type="hidden" name="p-desc" value="{{product[3]}}">
-                        <input type="hidden" name="p-cat" value="{{product[4]}}">
-                        <button type="submit">Add to Cart</button>
-                    </form>
-                </td>
-            </tr>
+                    {% endfor %}
+                    <td>
+                        <form action="/add-to-cart" class="add-to-cart-btn" method="post">
+                            <input type="hidden" name="p-id" value="{{product[0]}}">
+                            <input type="hidden" name="p-name" value="{{product[1]}}">
+                            <input type="hidden" name="p-cost" value="{{product[2]}}">
+                            <input type="hidden" name="p-desc" value="{{product[3]}}">
+                            <input type="hidden" name="p-cat" value="{{product[4]}}">
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endif %}
             {%endfor%}
         </table>
     </div>
