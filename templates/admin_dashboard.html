@@ -18,8 +18,8 @@
         <nav class="nav-bar">
             <ul class ='nav-area'>
                 <p class="nav-list welcome-prompt">Welcome {{user}}</p>
-                <form action="/sign_out" method="get">
-                    <input type="submit" value="Checkout">
+                <form action="/sign_out" method="get" class="log-off">
+                    <input type="submit" value="Log-off">
                 </form>
             </ul>
         </nav>
@@ -28,22 +28,24 @@
         <div class="update-product">
             <h3>Modify Product List</h3>
             <form action="/update-inventory" method="post" class="update-product-list" enctype="multipart/form-data">
-                <label for="file-name">Upload File</label>
+                <p>Select a csv file to modify the product inventory</p>
                 <input type="file" id="chooseFile" name="file-name">
                 <input type="submit" id="submitBtn" value="Submit">
             </form>
         </div>
         <div class="trans-list">
             <h3>Recent Transactions</h3>
-            <table>
+            <table class="history-table">
                 <tr>
                     <th>Order Placed by</th>
                     <th>Order Total</th>
+                    <th>Transaction Date</th>
                 </tr>
             {% for order in history %}
                 <tr>
                     <td>{{ order["name"] }}</td>
                     <td>${{ order["Order-total"] }}</td>
+                    <td>{{ order["date"] }}</td>
                 </tr>
             {% endfor %}
             </table>
