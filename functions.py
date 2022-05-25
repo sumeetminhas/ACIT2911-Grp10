@@ -41,7 +41,7 @@ def class_to_dict(instance):
         return list_html, instance.total
 
 def update_products(products):
-    with open(os.path.join(products_file_path, 'products2.csv'), 'w', encoding="UTF8", newline='') as file:
+    with open(os.path.join(products_file_path, 'products.csv'), 'w', encoding="UTF8", newline='') as file:
         writer = csv.writer(file)
         for product in products:
             writer.writerow(product)
