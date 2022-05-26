@@ -217,7 +217,7 @@ def email():
             <p>Taxes: {cart_total*0.12}</p>
             <h3>Total amount: {cart_total * 1.12 }</h3>
         """
-        # mail.send(msg)
+        mail.send(msg)
 
         trans_summary = {
             "name": full_name,
