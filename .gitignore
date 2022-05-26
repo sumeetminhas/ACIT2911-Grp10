@@ -1,4 +1,7 @@
 venv/
+*.pyc
+staticfiles
+db.sqlite3
 .coverage
 __pycache__/
 .pytest_cache/
