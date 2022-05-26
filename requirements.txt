@@ -8,6 +8,7 @@ coverage==6.3.2
 django
 django-heroku
 Flask==2.1.2
+flask_mail
 gunicorn
 idna==3.3
 importlib-metadata==4.11.3
