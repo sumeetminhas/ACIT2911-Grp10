@@ -53,7 +53,6 @@ def homepage():
     print(LIVE_SESSIONS)
     return render_template('/home.html', users=LIVE_SESSIONS)
 
-
 @app.route('/products')
 def products():
     if os.path.exists(os.path.join(products_file_path, 'products.csv')):
