@@ -5,7 +5,7 @@ from cart import Cart
 import os
 import json
 import csv
-from functions import read_products, read_json, add_to_history, class_to_dict, update_products
+from functions import read_products, read_json, add_to_history, class_to_dict, update_products, create_session
 from werkzeug.utils import secure_filename
 import datetime
 from flask_mail import Mail, Message
@@ -43,14 +43,8 @@ mail = Mail(app)
 
 @app.route('/')
 def homepage():
-    if len(LIVE_SESSIONS) == 0:
-        LIVE_SESSIONS.append(Cart(request.remote_addr))
-    for user in LIVE_SESSIONS:
-        if user.owner == request.remote_addr:
-            break
-        else: LIVE_SESSIONS.append(Cart(request.remote_addr))
-    
-    print(LIVE_SESSIONS)
+    print(session.keys())
+    print(request.remote_user)
     return render_template('/home.html', users=LIVE_SESSIONS)
 
 @app.route('/products')
@@ -110,7 +104,7 @@ def sign_out():
             admin_list = json.load(creds)
             for admin in admin_list:
                 if admin['email'] in session.values():
-                    session.clear()
+                    session.pop('email', default=None)
                     return redirect('admin')
                 
     return redirect(url_for('admin'))

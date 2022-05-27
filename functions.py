@@ -4,6 +4,7 @@ import json
 import os
 from cart import Cart
 from werkzeug.utils import secure_filename
+from flask import session
 
 products_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'admin-only')
 login_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'admin-only', 'creds.json')
@@ -45,3 +46,7 @@ def update_products(products):
         writer = csv.writer(file)
         for product in products:
             writer.writerow(product)
+
+def create_session():
+    if 'customer' not in session.keys(): 
+        session['customer'] = Cart('customer')
