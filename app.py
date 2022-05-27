@@ -44,7 +44,7 @@ mail = Mail(app)
 @app.route('/')
 def homepage():
     print(session.keys())
-    print(request.remote_user)
+    print(request.headers)
     return render_template('/home.html', users=LIVE_SESSIONS)
 
 @app.route('/products')
